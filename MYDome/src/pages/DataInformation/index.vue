@@ -6,7 +6,7 @@
       <div class="from">
         <nav>
           <img src="../../../static/images/screenshot_03.png" alt />
-          <div>上传您的抖音截图</div>
+          <div>上传您的微信朋友圈截图、抖音截图(注:图片大小请限制在1MB以内!)</div>
         </nav>
         <div class="ready_box">
           <form
@@ -35,7 +35,7 @@
           <img src="../../../static/images/transpond_03.png" alt />
           <div>请填写转发数据</div>
         </nav>
-        <input type="text" placeholder="转发数据" v-model="forward" />
+        <input type="text" placeholder="抖音转发数据" v-model="forward" />
         <nav>
           <img src="../../../static/images/comment_03.png" alt />
           <div>请填写评论数据</div>
@@ -136,7 +136,7 @@ export default {
       font-size: 0.3rem;
       font-weight: 700;
       height: 13vw;
-      line-height: 12vw;
+      line-height: 5vw;
       display: flex;
       align-items: center;
       img {
