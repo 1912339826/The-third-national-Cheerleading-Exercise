@@ -33,7 +33,7 @@
         </div>
         <nav>
           <img src="../../../static/images/transpond_03.png" alt />
-          <div>请填写转发数据</div>
+          <div>请填写转发数据(注:微信截图参赛可不填)</div>
         </nav>
         <input type="text" placeholder="抖音转发数据" v-model="forward" />
         <nav>
