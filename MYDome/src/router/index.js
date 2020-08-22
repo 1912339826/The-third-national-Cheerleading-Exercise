@@ -12,6 +12,8 @@ import DataInformation from '../pages/DataInformation/index'
 import ActivePage from '../pages/ActivePage/index'
 // 查询成绩页面
 import WeekOfCity from '../pages/WeekOfCity/index'
+// 扫描二维码页面
+import QuickMark from '../pages/QuickMark/index.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -67,6 +69,15 @@ export default new Router({
       meta: {
         KeepAlive: false,
         title:"排名"
+      }
+    },
+    {
+      path: '/QuickMark',
+      name: 'QuickMark',
+      component: QuickMark,
+      meta: {
+        KeepAlive: false,
+        title:"扫描二维码"
       }
     }
   ]

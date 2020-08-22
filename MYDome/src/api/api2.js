@@ -34,4 +34,6 @@ export default {
   getParentCity:`${BASE_URLA}/city/getParentCity`,
   // 查询成绩 
   findAchievement:`${BASE_URLA}/info/findAchievement`,
+  // 二维码图片
+  getQrCode:`${BASE_URLA}/activity/getQrCode`
 };

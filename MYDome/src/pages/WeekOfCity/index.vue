@@ -63,7 +63,8 @@ export default {
       console.log(this.IsgetRank);
     },
     async findAchievement() {
-      let res = await this.$req(window.api.findAchievement, {});
+      // 列表参数 赛事类型type 0普通 1黄金 
+      let res = await this.$req(window.api.findAchievement, {type:0});
       if (res.data.success) {
         // this.getRank();
          this.IsgetRank = res.data.result;

@@ -56,7 +56,8 @@ export default {
     // 获取排名
     async getRank() {
       let res = await this.$req(window.api.getRank, {
-        activityId: this.$route.query.id
+        activityId: this.$route.query.id,
+        type:0
       });
       this.IsgetRank = res.data.result;
       console.log(this.IsgetRank);

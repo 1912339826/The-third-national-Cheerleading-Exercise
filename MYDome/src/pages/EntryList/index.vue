@@ -65,7 +65,7 @@ export default {
     Todata(data) {
       let datas = new Date(data);
       let year = datas.getFullYear();
-      let month = datas.getMonth();
+      let month = datas.getMonth()+1;
       month = month < 10 ? `0${month}` : month;
       let getDate = datas.getDate();
       return `${year}-${month}-${getDate}`;

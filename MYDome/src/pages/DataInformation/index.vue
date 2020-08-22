@@ -8,8 +8,24 @@
           <img src="../../../static/images/screenshot_03.png" alt />
           <div>上传您的微信朋友圈截图、抖音截图(注:图片大小请限制在1MB以内!)</div>
         </nav>
+       
         <div class="ready_box">
-          <form
+          <uploader
+            :after-read="afterRead"
+            v-model="fileList"
+            :deletable="false"
+            :preview-full-image="false"
+            ref="uploader"
+          />
+          <div @click="up" class="up">
+            <!-- 默认展示 -->
+            <img src="../../../static/images/ready.png" alt class="ready" v-if="Isimg==''&&!is_loading" />
+            <!-- 上传中 -->
+             <loading type="spinner" size="20" v-else-if="is_loading"/>
+            <!-- 上传成功之后 -->
+            <img :src="Isimg" alt v-else class="file" />
+          </div>
+          <!-- <form
             action
             method="post"
             enctype="multipart/form-data"
@@ -21,7 +37,7 @@
               name
               id="file"
               @change="file($event)"
-              accept="image/gif, image/jpeg, image/jpg, image/png, image/svg"
+              accept="image/*"
               style="display:none"
             />
           </form>
@@ -29,13 +45,13 @@
           <label for="file">
             <img src="../../../static/images/ready.png" alt class="ready" v-if="Isimg==''" />
             <img :src="Isimg" alt v-else class="file" />
-          </label>
+          </label>-->
         </div>
-        <nav>
+        <!-- <nav>
           <img src="../../../static/images/transpond_03.png" alt />
           <div>请填写转发数据(注:微信截图参赛可不填)</div>
         </nav>
-        <input type="text" placeholder="抖音转发数据" v-model="forward" />
+        <input type="text" placeholder="抖音转发数据" v-model="forward" /> -->
         <nav>
           <img src="../../../static/images/comment_03.png" alt />
           <div>请填写评论数据</div>
@@ -54,12 +70,14 @@
 
 <script>
 import axios from "axios";
-import { Toast } from "vant";
+import { Toast, Uploader, Loading } from "vant";
 import NavTab from "../../components/Isnav";
 export default {
   name: "DataInformation",
   components: {
-    NavTab
+    NavTab,
+    Uploader,
+    Loading,
   },
   props: {},
   data() {
@@ -68,7 +86,13 @@ export default {
       temporaryImg: "",
       forward: "",
       comment: "",
-      likes: ""
+      likes: "",
+      fileList: [
+        {
+          url: "",
+        },
+      ],
+      is_loading:false
     };
   },
   created() {},
@@ -76,27 +100,40 @@ export default {
   activated() {},
   update() {},
   methods: {
-    file(e) {
-      let files = document.getElementById("file");
+    up() {
+      this.$refs.uploader.chooseFile();
+    },
+    afterRead(file) {
+      // 此时可以自行将文件上传至服务器
       var formData = new window.FormData();
-      formData.append("file", files.files[0]);
+      formData.append("file", file.file);
       this.UploadPhotos(formData);
     },
+    // file(e) {
+    //   let files = document.getElementById("file");
+    //   var formData = new window.FormData();
+    //   formData.append("file", files.files[0]);
+    //   this.UploadPhotos(formData);
+    // },
     UploadPhotos(files) {
+      this.is_loading = true;
       let url = `${window.BASE_URLA}/info/import`;
       let formData = files;
-      this.instance.post(url, formData).then(res => {
+      this.instance.post(url, formData).then((res) => {
         this.Isimg = res.data.result.url;
+        // this.fileList[0].url = res.data.result.url;
+        this.is_loading = false;
       });
+      this.fileList = [{ url: "" }];
     },
     async InfoSubmit() {
       let res = await this.$req(window.api.InfoSubmit, {
-        forward: Number(this.forward),
+        // forward: Number(this.forward),
         comment: Number(this.comment),
         pic: this.Isimg,
-        // pic: `http://leke.qiahaojia.com/pic/1591929122490.png`,
         likes: Number(this.likes),
-        activityId: this.$route.query.id
+        activityId: this.$route.query.id,
+        type:0
       });
       if (res.data.success) {
         this.$router.push("./EntryList");
@@ -105,12 +142,16 @@ export default {
       }
     },
     submit() {
-      this.InfoSubmit();
-    }
+      if (this.comment != "" && this.likes != "") {
+        this.InfoSubmit();
+      } else {
+        Toast.fail("请填写完整!");
+      }
+    },
   },
   filters: {},
   computed: {},
-  watch: {}
+  watch: {},
 };
 </script>
 
@@ -145,13 +186,35 @@ export default {
         height: 5vw;
       }
     }
+    /deep/.van-loading__spinner.van-loading__spinner--spinner {
+      width: 5vw !important;
+      height: 5vw !important;
+    }
     .ready_box {
       width: 25vw;
       height: 25vw;
       background-color: #fafafa;
       border: 2px solid #dddddd;
       border-radius: 2vw;
-      label {
+      position: relative;
+      /deep/.van-uploader {
+        width: 0;
+        height: 0;
+        overflow: hidden;
+      }
+      // label {
+      //   display: flex;
+      //   align-items: center;
+      //   justify-content: center;
+      //   width: 100%;
+      //   height: 100%;
+      //   background-color: #fafafa;
+      //   border-radius: 2vw;
+      // }
+      .up {
+        position: absolute;
+        top: 0;
+        left: 0;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -159,15 +222,15 @@ export default {
         height: 100%;
         background-color: #fafafa;
         border-radius: 2vw;
-      }
-      .ready {
-        width: 30%;
-        height: 30%;
-      }
-      .file {
-        width: 100%;
-        height: 100%;
-        border-radius: 2vw;
+        .ready {
+          width: 30%;
+          height: 30%;
+        }
+        .file {
+          width: 100%;
+          height: 100%;
+          border-radius: 2vw;
+        }
       }
     }
     input {

@@ -124,7 +124,7 @@ export default {
       }
     },
     async findCurrentActivity() {
-      let res = await this.$req(window.api.findCurrentActivity, {});
+      let res = await this.$req(window.api.findCurrentActivity, {type:0});
       this.html = res.data.result.rule;
     },
     async toAuthIndex() {
@@ -143,7 +143,8 @@ export default {
       let res = await this.$req(window.api.signAdd, {
         name: this.name,
         cityId: this.city.id,
-        phone: this.phone
+        phone: this.phone,
+        type:0
       });
       let message = res.data.message;
       if (message == "") {
