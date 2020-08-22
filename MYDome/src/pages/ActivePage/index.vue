@@ -53,7 +53,7 @@ export default {
   update() {},
   methods: {
     QuickMark(){
-      this.close();
+      // this.close();
       // if(this.radio != "1"){
       //   this.$router.push("/QuickMark")
       // }else{
@@ -69,7 +69,8 @@ export default {
       this.id = res.data.result.id;
     },
     toDataInformation() {
-      this.show = true;
+      // this.show = true;
+      this.QuickMark()
     },
   },
   filters: {},

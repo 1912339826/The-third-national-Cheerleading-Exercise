@@ -77,7 +77,8 @@ export default {
     // 获取排名
     async getRank(id) {
       let res = await this.$req(window.api.getRank, {
-        activityId: id
+        activityId: id,
+        type:0
       });
       if(!res.data.success){
         Toast.fail(res.data.message);
