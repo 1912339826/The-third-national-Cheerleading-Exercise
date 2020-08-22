@@ -3,7 +3,7 @@
     <NavTab />
     <div class="content">
       <img :src="img" alt />
-      <button @click="toDataInformation">我要参赛</button>
+      <!-- <button @click="toDataInformation">我要参赛</button> -->
     </div>
     <Popup v-model="show" @click-overlay="close">
       <div class="ispopup">
