@@ -67,12 +67,12 @@
 				<image src="../../images/comment_03.png" alt />
 				<view>请填写评论数据</view>
 			</view>
-			<input type="text" placeholder="评论数据" bindinput="inout_comment" model:value="{{comment}}" />
+			<input type="text" placeholder="评论数据" bindinput="input_comment" model:value="{{comment}}" />
 			<view class="nav">
 				<image src="../../images/Like_03.png" alt />
 				<view>请填写点赞数据</view>
 			</view>
-			<input type="text" placeholder="点赞数据" bindinput="inout_tlikes" model:value="{{likes}}" />
+			<input type="text" placeholder="点赞数据" bindinput="input_tlikes" model:value="{{likes}}" />
 			<view wx:if="{{!!hasNormal_my}}">
 				<view class="bilocation" bindtap="bilocation">
 					<view>是否同时参加“普通赛场”?</view>

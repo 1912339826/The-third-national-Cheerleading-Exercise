@@ -31,7 +31,7 @@ Page({
 
   },
   onGotUserInfo(e) {
-    console.log(e)
+    // console.log(e)
     let message = e.detail.errMsg
     if (message == "getUserInfo:ok") {
       // 允许

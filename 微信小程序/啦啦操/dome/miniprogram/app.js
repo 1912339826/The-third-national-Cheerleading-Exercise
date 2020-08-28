@@ -7,12 +7,13 @@ App({
   onLaunch: function (options) {
     if (options.scene == 1011) {
       // 判断是二维码进入
-      console.log(options.query.sceneId)
+      // console.log(options.query.sceneId)
       // getTokenByScene
       ref.default.get(config.default.getTokenByScene.url, {
         sceneId: options.query.sceneId
       }, res => {
-        console.log(res.data.result.token)
+        // console.log(res.data.result.token)
+        // 存储用户Token
         wx.setStorageSync("accessToken", res.data.result.token);
       })
     }
@@ -30,18 +31,18 @@ App({
     }
     this.globalData = {}
     // 登录
-    console.log(wx.getStorageSync("accessToken"))
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        console.log(res)
-        // wxLogin
-        // ref.default.post(config.default.wxLogin.url, {
-        //   wxCode: res.code
-        // }, res => {
-        //   console.log(res)
-        // })
-      }
-    })
+    // console.log(wx.getStorageSync("accessToken"))
+    // wx.login({
+    //   success: res => {
+    //     // 发送 res.code 到后台换取 openId, sessionKey, unionId
+    //     console.log(res)
+    //     // wxLogin
+    //     // ref.default.post(config.default.wxLogin.url, {
+    //     //   wxCode: res.code
+    //     // }, res => {
+    //     //   console.log(res)
+    //     // })
+    //   }
+    // })
   }
 })

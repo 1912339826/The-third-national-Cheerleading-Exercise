@@ -34,8 +34,23 @@ Page({
     wx.setNavigationBarTitle({
       title: "首页" //页面标题为路由参数
     })
-    this.cityTree();
-    this.findCurrentActivity();
+    let that = this
+    wx.getSetting({
+      success(res) {
+        // 是否授过权
+        // console.log(res.authSetting["scope.userInfo"])
+        let userInfo = res.authSetting["scope.userInfo"]
+        if (userInfo) {
+          that.cityTree();
+          that.findCurrentActivity();
+        } else {
+          wx.redirectTo({
+            url: '../Authorized/Authorized',
+          })
+        }
+      }
+    })
+
   },
 
   cansai() {
@@ -59,14 +74,14 @@ Page({
           province: provinceList,
           cityList: province_children,
           city: cityList
-        },function(){
+        }, function () {
           Toast.clear();
         })
       }
     })
   },
   getParentCity(id) {
-    console.log(this.data.province, this.data.cityList, this.data.city)
+    // console.log(this.data.province, this.data.cityList, this.data.city)
     fun_ref.get(fun_config.getParentCity.url, {
       cityId: id
     }, res => {
@@ -86,7 +101,7 @@ Page({
         if (res.data.result.id == element.id) {
           this.setData({
             city: element
-          },function(){
+          }, function () {
             Toast.clear();
           })
         }

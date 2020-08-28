@@ -20,6 +20,20 @@ Page({
     wx.setNavigationBarTitle({
       title: "活动" //页面标题为路由参数
     })
+    wx.getSetting({
+      success(res) {
+        // 是否授过权
+        // console.log(res.authSetting["scope.userInfo"])
+        let userInfo = res.authSetting["scope.userInfo"]
+        if (userInfo) {
+          that.findCurrentActivity()
+        } else {
+          wx.redirectTo({
+            url: '../Authorized/Authorized',
+          })
+        }
+      }
+    })
   },
   onChange(event) {
     this.setData({
@@ -35,14 +49,14 @@ Page({
     fun_ref.get(
       fun_config.findCurrentActivity.url, {},
       res => {
-        console.log('成功了 :>> ', res);
+        // console.log('成功了 :>> ', res);
         this.setData({
           img: res.data.result.pic,
           id: res.data.result.id
         })
       },
       er => {
-        console.log('失败了 :>> ', er);
+        // console.log('失败了 :>> ', er);
       })
 
   },
