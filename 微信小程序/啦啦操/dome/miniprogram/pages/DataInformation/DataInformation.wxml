@@ -8,33 +8,8 @@
 				<image src="../../images/screenshot_03.png" alt />
 				<view>上传您的微信朋友圈截图(或者视频)、抖音截图(或者视频)(注:图片大小请限制在1MB以内!)</view>
 			</view>
-
 			<view class="ready_box">
-				<view class="radio_" wx:if="{{way==''}}">
-					<view class="nav">
-						请先选择上传方式：
-					</view>
-					<radio-group bindchange="radioChange">
-						<label class="weui-cell weui-check__label">
-							<text>图片</text>
-							<view class="weui-cell__hd">
-								<radio value="img" checked="true" />
-							</view>
-						</label>
-
-						<label class="weui-cell weui-check__label">
-							<text>视频</text>
-							<view class="weui-cell__hd">
-								<radio value="video" />
-							</view>
-
-						</label>
-						<view class="way_" bindtap="way_">
-							确定
-						</view>
-					</radio-group>
-				</view>
-				<view class="img" wx:if="{{way=='img'}}">
+				<view class="img">
 					<view class="van_uploader">
 						<van-uploader bind:after-read="afterRead" deletable="false" bind:oversize="fun_oversize" preview-image="false" />
 					</view>
@@ -47,20 +22,44 @@
 						<image src="{{Isimg}}" alt wx:else class="file" />
 					</view>
 				</view>
-				<view class="video" wx:if="{{way=='video'}}">
-					<view class="van_uploader">
-						<!-- <van-uploader bind:after-read="afterRead_video" accept="video" deletable="false" bind:oversize="fun_oversize" preview-image="false" /> -->
-						<view class="weui-uploader__input" bindtap="afterRead_video"></view>
+				<view class="nav">上传视频相关文件，请选择其中一种：（二选一）</view>
+				<view class="either_or">
+					<view class="box">
+						<view class="nav">视频：</view>
+						<view class="video">
+							<view class="van_uploader">
+								<!-- <van-uploader bind:after-read="afterRead_video" accept="video" deletable="false" bind:oversize="fun_oversize" preview-image="false" /> -->
+								<view class="weui-uploader__input" bindtap="afterRead_video"></view>
+							</view>
+							<view class="up">
+								<!-- 默认展示 -->
+								<image src="../../images/ready.png" alt class="ready" wx:if="{{afterRead_video_img==''&&!is_loading_video}}" />
+								<!-- 上传中 -->
+								<van-loading type="spinner" size="20" wx:elif="{{is_loading_video}}" />
+								<!-- 上传成功之后 -->
+								<image src="{{afterRead_video_img}}" alt wx:else class="file" />
+							</view>
+						</view>
 					</view>
-					<view class="up">
-						<!-- 默认展示 -->
-						<image src="../../images/ready.png" alt class="ready" wx:if="{{afterRead_video_img==''&&!is_loading_video}}" />
-						<!-- 上传中 -->
-						<van-loading type="spinner" size="20" wx:elif="{{is_loading_video}}" />
-						<!-- 上传成功之后 -->
-						<image src="{{afterRead_video_img}}" alt wx:else class="file" />
+					<view class="box">
+						<view class="nav">视频截图：</view>
+						<view class="img">
+							<view class="van_uploader">
+								<van-uploader bind:after-read="afterRead_videoScreenshot" deletable="false" bind:oversize="fun_oversize" preview-image="false" />
+							</view>
+							<view bindtap="up" class="up">
+								<!-- 默认展示 -->
+								<image src="../../images/ready.png" alt class="ready" wx:if="{{videoScreenshot==''&&!videoScreenshot_loading}}" />
+								<!-- 上传中 -->
+								<van-loading type="spinner" size="20" wx:elif="{{videoScreenshot_loading}}" />
+								<!-- 上传成功之后 -->
+								<image src="{{videoScreenshot}}" alt wx:else class="file" />
+							</view>
+						</view>
 					</view>
+
 				</view>
+
 
 			</view>
 			<view class="nav">
@@ -96,9 +95,10 @@
 <van-dialog id="van-dialog" />
 
 
-<van-popup show="{{ show }}" close-on-click-overlay="false" round custom-style="width:80vw;height:20vh;text-align: center; display: flex;flex-direction: column;align-items: center;justify-content: space-between;">
-	<view style="margin-top:40rpx">
+<van-popup show="{{ show }}" close-on-click-overlay="false" round custom-style="width:80vw;height:25vh;text-align: center; display: flex;flex-direction: column;align-items: center;justify-content: space-between;">
+	<view style="width:100%;height:7vw;line-height:12vw;">提示</view>
+	<view style="">
 		已提交成功，请退出界面！
 	</view>
-	<navigator open-type="exit" target="miniProgram" style="height:80rpx;line-height:80rpx;width:80%;margin-bottom:2vw;background-color: #09ba07;color:#ffffff;border-radius: 40rpx;">确定</navigator>
+	<navigator open-type="exit" target="miniProgram" style="height:80rpx;line-height:80rpx;width:80%;margin-bottom:5vw;background-color: #09ba07;color:#ffffff;border-radius: 40rpx;">确定</navigator>
 </van-popup>

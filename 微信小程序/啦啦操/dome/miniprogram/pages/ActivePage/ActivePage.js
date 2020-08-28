@@ -20,6 +20,7 @@ Page({
     wx.setNavigationBarTitle({
       title: "活动" //页面标题为路由参数
     })
+    let that = this;
     wx.getSetting({
       success(res) {
         // 是否授过权
@@ -29,7 +30,7 @@ Page({
           that.findCurrentActivity()
         } else {
           wx.redirectTo({
-            url: '../Authorized/Authorized',
+            url: '../Authorized/Authorized?page_name=ActivePage',
           })
         }
       }

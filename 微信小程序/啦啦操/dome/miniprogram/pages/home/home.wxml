@@ -22,11 +22,11 @@
 			</view>
 			<view>
 				<view class="nav">请填写您的姓名</view>
-				<input type="text" bindinput="input_name" value="{{name}}" />
+				<input type="text" bindinput="input_name" value="{{name}}" disabled="{{Ismessage}}" />
 			</view>
 			<view>
 				<view class="nav">请填写您的联系方式</view>
-				<input type="text" bindinput="input_phone" value="{{phone}}" />
+				<input type="text" bindinput="input_phone" value="{{phone}}"  disabled="{{Ismessage}}"/>
 			</view>
 			<!-- 提示 -->
 			<view class="reminder">{{message}}</view>

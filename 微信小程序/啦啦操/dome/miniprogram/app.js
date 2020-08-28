@@ -5,9 +5,12 @@ App({
   ref: ref,
   config: config,
   onLaunch: function (options) {
-    if (options.scene == 1011) {
+    console.log(options)
+    console.log(wx.getLaunchOptionsSync())
+    wx.removeStorageSync('accessToken')
+    if (options.scene == 1101 ||options.scene == 1011) {
       // 判断是二维码进入
-      // console.log(options.query.sceneId)
+      console.log(options.query.sceneId)
       // getTokenByScene
       ref.default.get(config.default.getTokenByScene.url, {
         sceneId: options.query.sceneId
@@ -15,6 +18,30 @@ App({
         // console.log(res.data.result.token)
         // 存储用户Token
         wx.setStorageSync("accessToken", res.data.result.token);
+        wx.login({
+          success: res => {
+            // 发送 res.code 到后台换取 openId, sessionKey, unionId
+            ref.default.post(config.default.wxLogin.url, {
+              wxCode: res.code
+            }, res => {
+              // console.log(res)
+            })
+          }
+        })
+      })
+    } else {
+      wx.login({
+        success: res => {
+          // 发送 res.code 到后台换取 openId, sessionKey, unionId
+          ref.default.post(config.default.wxLogin.url, {
+            wxCode: res.code
+          }, res => {
+            wx.setStorageSync("openid",res.data.result)
+            // console.log(res.header['Set-Cookie'])
+            // wx.setStorageSync('sessionid', res.header['Set-Cookie']); //保存Cookie到Storage
+            // wx.setStorageSync("accessToken", res.data.result.token);
+          })
+        }
       })
     }
     if (!wx.cloud) {
@@ -30,19 +57,5 @@ App({
       })
     }
     this.globalData = {}
-    // 登录
-    // console.log(wx.getStorageSync("accessToken"))
-    // wx.login({
-    //   success: res => {
-    //     // 发送 res.code 到后台换取 openId, sessionKey, unionId
-    //     console.log(res)
-    //     // wxLogin
-    //     // ref.default.post(config.default.wxLogin.url, {
-    //     //   wxCode: res.code
-    //     // }, res => {
-    //     //   console.log(res)
-    //     // })
-    //   }
-    // })
   }
 })

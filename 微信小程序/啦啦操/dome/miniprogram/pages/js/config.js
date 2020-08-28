@@ -28,6 +28,11 @@ export default {
     type: "POST",
     url: `${BASE_URLA}/sign/signAdd`
   },
+  // 小程序报名
+  appLetsSignAdd: {
+    type: "POST",
+    url: `${BASE_URLA}/sign/appLetsSignAdd`
+  },
   // 获取最新活动信息/活动规则
   findCurrentActivity: {
     type: "GET",

@@ -45,7 +45,7 @@ Page({
           that.findCurrentActivity();
         } else {
           wx.redirectTo({
-            url: '../Authorized/Authorized',
+            url: '../Authorized/Authorized?page_name=home',
           })
         }
       }
@@ -142,17 +142,22 @@ Page({
   },
 
   async signAdd() {
-    fun_ref.post(fun_config.signAdd.url, {
+    wx.removeStorageSync('sessionid'); //每次登录时清楚缓存
+    fun_ref.post(fun_config.appLetsSignAdd.url, {
       name: this.data.name,
       cityId: this.data.city.id,
       phone: this.data.phone,
-      type: 1
+      type: 1,
+      openId: wx.getStorageSync("openid")
     }, res => {
-      let message = res.data.message;
-      if (message == "") {
+      console.log(res.data)
+      let status = res.data.status;
+      if (status == 200) {
+        console.log(res.data.result.token)
         wx.setStorageSync("accessToken", res.data.result.token);
         Toast.success("报名成功!");
         this.setData({
+          message: "报名成功！请参赛！",
           Ismessage: true
         })
       } else {
@@ -161,7 +166,6 @@ Page({
         })
       }
     })
-
   },
   // 省份
   fun_provinceList() {

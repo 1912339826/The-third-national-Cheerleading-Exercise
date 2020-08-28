@@ -12,6 +12,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    videoScreenshot_loading: false,
+    videoScreenshot_file: {},
+    videoScreenshot_fileList: [],
+    videoScreenshot: "",
     Isimg: "",
     temporaryImg: "",
     forward: "",
@@ -21,8 +25,6 @@ Page({
     is_loading: false,
     activityId: '',
     id: "",
-    way: "",
-    radio_change_way: "img",
     afterRead_video_img: "",
     is_loading_video: false,
     file: {},
@@ -38,6 +40,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     wx.setNavigationBarTitle({
       title: "数据信息" //页面标题为路由参数
     })
@@ -68,14 +71,14 @@ Page({
         // 未支付
         Dialog.confirm({
             title: '提示',
-            message: '未支付！请支付！',
+            message: '参加黄金赛事需要支付相关费用！',
             width: "80vw",
             confirmButtonText: "去支付",
             className: "dialog_my"
           })
           .then(() => {
             // 确认
-            this.payment_wxPay()
+            this.payment_wxPay(activityId)
           })
           .catch(() => {
             // 取消
@@ -125,23 +128,21 @@ Page({
   },
 
   submit() {
+    if (this.data.videoScreenshot != "" && this.data.videoId != "") {
+      Toast.fail("视频与视频截图只能选择一个进行上传!");
+      return
+    }
     if (this.data.comment != "" && this.data.likes != "") {
       this.InfoSubmit();
     } else {
       Toast.fail("请填写完整!");
     }
-
   },
 
   InfoSubmit() {
-    let cover
-    if (this.data.way == "img") {
-      cover = ""
-    } else {
-      cover = F
-    }
     let that = this;
     fun_ref.post(fun_config.InfoSubmit.url, {
+      videoScreenshot: this.data.videoScreenshot,
       comment: Number(this.data.comment),
       pic: this.data.Isimg,
       likes: Number(this.data.likes),
@@ -160,12 +161,19 @@ Page({
       }
     })
   },
-  payment_wxPay() {
+  payment_wxPay(activityId) {
     fun_ref.post(fun_config.payment_wxPay.url, {
-      activityId: "7859c55113a947119b5c721c809f7061"
+      activityId: activityId
     }, res => {
-      // console.log(res.data.result)
-      this.pay(res.data.result.timeStamp, res.data.result.nonceStr, res.data.result.package, res.data.result.sign)
+      // console.log(res.data.success)
+      if (res.data.success) {
+        this.pay(res.data.result.timeStamp, res.data.result.nonceStr, res.data.result.package, res.data.result.sign)
+      } else {
+        Toast.fail(res.data.message);
+        wx.redirectTo({
+          url: '../home/home',
+        })
+      }
     })
   },
   pay(timeStamp, nonceStr, prepayid, paySign) {
@@ -188,7 +196,7 @@ Page({
     })
   },
 
-  // 上传图片
+  // 上传图片1
   afterRead(event) {
     this.setData({
       fileList: [],
@@ -217,6 +225,37 @@ Page({
       },
     });
   },
+
+  // 上传图片2
+  afterRead_videoScreenshot(event) {
+    this.setData({
+      videoScreenshot_fileList: [],
+      videoScreenshot_loading: true
+    })
+    let this_ = this;
+    const {
+      file
+    } = event.detail;
+    // console.log(file)
+    // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
+    wx.uploadFile({
+      url: fun_config.UploadPhotos.url, // 仅为示例，非真实的接口地址
+      filePath: file.path,
+      name: 'file',
+      success(res) {
+        // 上传完成需要更新 fileList
+        // console.log(JSON.parse(res.data).result.url)
+        this_.setData({
+          videoScreenshot: JSON.parse(res.data).result.url,
+          videoScreenshot_loading: false,
+          videoScreenshot_fileList: [{
+            url: JSON.parse(res.data).result.url
+          }]
+        })
+      },
+    });
+  },
+
   // 上传视频
   afterRead_video() {
     let that = this;
@@ -261,18 +300,6 @@ Page({
       }
     })
 
-  },
-  // 选择是上传图片还是视频
-  radioChange(e) {
-    this.setData({
-      radio_change_way: e.detail.value
-    })
-  },
-  // 确定上传方式。
-  way_() {
-    this.setData({
-      way: this.data.radio_change_way
-    })
   },
   // 获取视频播放凭证
   getPlayInfo_info(videoId) {
@@ -440,7 +467,7 @@ Page({
           that.findCurrentActivity()
         } else {
           wx.redirectTo({
-            url: '../Authorized/Authorized',
+            url: '../Authorized/Authorized?page_name=DataInformation',
           })
         }
       }

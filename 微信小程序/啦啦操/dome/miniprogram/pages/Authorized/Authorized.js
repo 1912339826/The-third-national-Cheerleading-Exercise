@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    page_name: ""
   },
 
   /**
@@ -14,6 +14,10 @@ Page({
   onLoad: function (options) {
     wx.setNavigationBarTitle({
       title: "授权登录" //页面标题为路由参数
+    })
+    console.log(options.page_name)
+    this.setData({
+      page_name: options.page_name
     })
   },
 
@@ -35,8 +39,9 @@ Page({
     let message = e.detail.errMsg
     if (message == "getUserInfo:ok") {
       // 允许
+      
       wx.redirectTo({
-        url: '../DataInformation/DataInformation',
+        url: `../${this.data.page_name}/${this.data.page_name}`,
       })
     } else {
       // 拒绝

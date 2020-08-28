@@ -39,6 +39,12 @@
 
 .ready_box {
   display: flex;
+  flex-direction: column;
+}
+
+.img_{
+  position: absolute;
+  z-index: 9;
 }
 
 .ready_box .img,.video{
@@ -47,7 +53,12 @@
   position: relative;
 }
 
-
+.either_or{
+  display: flex;
+  justify-content: space-around;
+  height: 310rpx;
+  width: 80%;
+}
 
 .ready_box .up {
   z-index: 1;

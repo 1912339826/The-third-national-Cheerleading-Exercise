@@ -18,11 +18,11 @@
         </div>
         <div>
           <nav>请填写您的姓名</nav>
-          <input type="text" v-model="name" />
+          <input type="text" v-model="name" :disabled="Ismessage"/>
         </div>
         <div>
           <nav>请填写您的联系方式</nav>
-          <input type="text" v-model="phone" />
+          <input type="text" v-model="phone" :disabled="Ismessage"/>
         </div>
         <!-- 提示 -->
         <div class="reminder">{{message}}</div>
@@ -151,6 +151,7 @@ export default {
         window.localStorage.setItem("accessToken", res.data.result.token);
         Toast.success("报名成功!");
         this.Ismessage = true;
+        this.message = "报名成功！请参赛！"
       } else {
         this.message = message;
       }

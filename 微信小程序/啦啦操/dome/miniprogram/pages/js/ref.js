@@ -1,6 +1,7 @@
 function myrequest(url, method, param, successCallback, failCallback) {
     console.log('准备发起请求 :>> ', url);
     var _this = this;
+    console.log(wx.getStorageSync("accessToken"),'111')
     wx.request({
         url: url,
         data: param,
@@ -11,6 +12,7 @@ function myrequest(url, method, param, successCallback, failCallback) {
             'custom-header': method,
             'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
             "Access-Token": wx.getStorageSync('accessToken')
+            // 'Cookie': wx.getStorageSync("sessionid")//读取sessionid,当作cookie传入后台将PHPSESSID做session_id使用
         },
         success: (res) => {
             if (successCallback) {
