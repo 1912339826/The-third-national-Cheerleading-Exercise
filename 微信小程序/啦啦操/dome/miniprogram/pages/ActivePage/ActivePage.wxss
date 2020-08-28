@@ -1,0 +1,59 @@
+/* pages/ActivePage/ActivePage.wxss */
+.ActivePage {}
+
+.button_ {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.button_>view{
+  width: 50%;
+  text-align: center;
+  height: 70rpx;
+  line-height: 70rpx;
+}
+
+.button_ .close{
+  border: 1rpx solid #cccbcb;
+}
+.QuickMark{
+  color: #ee0a24;
+  border: 1rpx solid #ee0a24;
+}
+.ispopup {
+  font-size: 25rpx;
+  width: 90vw;
+  height: 40vw;
+  border-radius: 10vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 2vw;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content button {
+  position: fixed;
+  bottom: 3vh;
+  border: none;
+  background-color: #09ba07;
+  border-radius: 10vw;
+  color: #fff;
+  font-size: 25rpx;
+  width: 90%;
+  height: 12vw;
+  line-height: 8vw;
+  z-index: 999;
+}
+
+.content image {
+  width: 100%;
+  position: relative;
+  z-index: -1;
+}

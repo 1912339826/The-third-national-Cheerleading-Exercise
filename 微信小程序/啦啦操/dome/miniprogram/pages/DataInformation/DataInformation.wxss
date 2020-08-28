@@ -1,0 +1,178 @@
+/* pages/DataInformation/DataInformation.wxss */
+
+.DataInformation {
+  background-color: #3ba63e;
+  padding-bottom: 20vw;
+}
+
+.content {
+  padding-left: 4vw;
+  padding-right: 4vw;
+}
+
+.home_top {
+  width: 100%;
+}
+
+.from {
+  padding-left: 5vw;
+  padding-right: 5vw;
+  border-radius: 5vw;
+  background-color: #ffffff;
+  padding-bottom: 8vw;
+}
+
+ .nav {
+  font-size: 25rpx;
+  font-weight: 700;
+  height: 13vw;
+  line-height: 5vw;
+  display: flex;
+  align-items: center;
+}
+
+.from .nav image {
+  margin-right: 2vw;
+  width: 6vw;
+  height: 5vw;
+}
+
+.ready_box {
+  display: flex;
+}
+
+.ready_box .img,.video{
+  width: 25vw;
+  height: 25vw;
+  position: relative;
+}
+
+
+
+.ready_box .up {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25vw;
+  height: 25vw;
+  background-color: #fafafa;
+  border: 2px solid #dddddd;
+  border-radius: 2vw;
+}
+
+.ready_box .up .ready {
+  width: 30%;
+  height: 30%;
+}
+
+.ready_box .up .file {
+  height: 100%;
+  border-radius: 2vw;
+}
+
+.van_uploader {
+  z-index: 2;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25vw;
+  height: 25vw;
+  background-color: #fafafa;
+  border: 2px solid #dddddd;
+  border-radius: 2vw;
+}
+
+.weui-uploader__input{
+  width: 25vw;
+  height: 25vw;
+}
+
+.from input {
+  font-size: 25rpx;
+  padding: 3vw;
+  height: 2vw;
+  border-radius: 2vw;
+  border: 1px solid #dddddd;
+  background-color: #fafafa;
+}
+
+.from .button_ {
+  margin: 0 auto;
+  text-align: center;
+  width: 350rpx;
+  height: 75rpx;
+  line-height: 75rpx;
+  background-color: #09ba07;
+  border-radius: 40rpx;
+  color: #fff;
+  font-size: 25rpx;
+  margin-top: 6vw;
+}
+
+.van-hairline--top.van-dialog__footer button{
+  width: 102%;
+}
+.radio_ {
+  width: 100%;
+}
+.radio_ radio-group{
+  padding-left: 20rpx;
+  display: flex;
+  width: 90%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.radio_ radio-group label{
+  display: flex;
+  width: 50%;
+}
+
+.way_{
+  background-color: #09ba07;
+  padding: 20rpx;
+  color: #ffffff;
+  width: 30%;
+  text-align: center;
+  border-radius: 20rpx;
+}
+
+.bilocation{
+  display: flex;
+  align-items: center;
+  margin-top: 40rpx;
+  margin-left: 20rpx;
+}
+.yes{
+  position: relative;
+}
+
+
+.bilocation image{
+  width: 50rpx;
+ 
+}
+
+.pane_img{
+  height: 50rpx;
+}
+
+.right_img{
+  height: 39rpx;
+  position: absolute;
+  left: 0;
+  top: 8rpx;
+}
+
+.bilocation  .img{
+  margin-left: 20rpx;
+  display: flex;
+}

@@ -1,0 +1,136 @@
+/* pages/home/home.wxss */
+.home {
+  background-color: #3ba63e;
+}
+
+
+.home_content {
+  padding-left: 4vw;
+  padding-right: 4vw;
+}
+
+.from {
+  padding-left: 5vw;
+  padding-right: 5vw;
+  border-radius: 5vw;
+  background-color: #ffffff;
+}
+
+.from .reminder {
+  color: #d50c14;
+  font-size: 25rpx;
+  text-align: center;
+  height: 5vw;
+  line-height: 8vw;
+  margin-bottom: 20rpx;
+}
+
+.from .query_log {
+  text-align: center;
+  color: #2194d3;
+  font-size: 25rpx;
+  height: 15vw;
+  line-height: 15vw;
+  opacity: 0;
+}
+
+.from button {
+  border: none;
+  background-color: #09ba07;
+  border-radius: 10vw;
+  color: #fff;
+  font-size: 25rpx;
+  height: 12vw;
+  line-height: 8vw;
+}
+
+.from .nav {
+  font-size: 30rpx;
+  font-weight: 700;
+  height: 13vw;
+  line-height: 12vw;
+}
+
+.from .hint {
+  font-size: 25rpx;
+  color: rgb(34, 33, 33);
+  height: 5vw;
+  line-height: 5vw;
+}
+
+.from .select {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* .from .select select {
+  border: 1px solid #dddddd;
+  background-color: #fafafa;
+  height: 15vw;
+  border-radius: 2vw;
+  margin: 0;
+  font-size: 30rpx;
+  width: 48%;
+  text-align: center;
+  text-align-last: center;
+} */
+
+.from .select .son {
+  border: 1px solid #dddddd;
+  background-color: #fafafa;
+  height: 15vw;
+  line-height: 15vw;
+  border-radius: 2vw;
+  margin: 0;
+  font-size: 30rpx;
+  width: 48%;
+  text-align: center;
+  text-align-last: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.from input {
+  font-size: 30rpx;
+  text-align: center;
+  height: 10vw;
+  border-radius: 2vw;
+  border: 1px solid #dddddd;
+  background-color: #fafafa;
+}
+
+.activity_rules {
+  font-size: 25rpx;
+  color: #ffffff;
+  position: relative;
+}
+
+.activity_rules .content {
+  position: relative;
+  top: 0;
+  z-index: 10;
+  padding-bottom: 15vw;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  line-height: 7vw;
+}
+
+.activity_rules .home_bottom {
+  position: absolute;
+  bottom: 0;
+  z-index: 9;
+}
+
+.home_cal{
+  width: 100%;
+  height: 8vw;
+  margin-top: 2vw;
+  margin-bottom: 2vw;
+}
+.home_bottom{
+  width: 100%;
+}
+
+.home_top{
+  width: 100%;
+}

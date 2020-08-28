@@ -1,0 +1,8 @@
+<!--pages/success/success.wxml-->
+<view class="success">
+  <view class="img">
+     <van-icon name="success"  color="#ffffff" size="180rpx"/>
+  </view>
+  <view class="message">提交成功</view>
+  <view class="button_" bindtap="home_">返回首页</view>
+</view>

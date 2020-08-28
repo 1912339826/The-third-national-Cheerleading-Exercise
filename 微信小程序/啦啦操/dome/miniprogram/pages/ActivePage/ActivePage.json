@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "Popup": "@vant/weapp/popup/index",
+    "Radio": "@vant/weapp/radio/index",
+    "RadioGroup": "@vant/weapp/radio-group/index",
+    "van-button": "@vant/weapp/button/index"
+  }
+}

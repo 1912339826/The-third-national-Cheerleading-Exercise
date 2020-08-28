@@ -1,0 +1,47 @@
+//app.js
+let config = require('./pages/js/config');
+let ref = require('./pages/js/ref');
+App({
+  ref: ref,
+  config: config,
+  onLaunch: function (options) {
+    if (options.scene == 1011) {
+      // 判断是二维码进入
+      console.log(options.query.sceneId)
+      // getTokenByScene
+      ref.default.get(config.default.getTokenByScene.url, {
+        sceneId: options.query.sceneId
+      }, res => {
+        console.log(res.data.result.token)
+        wx.setStorageSync("accessToken", res.data.result.token);
+      })
+    }
+    if (!wx.cloud) {
+      console.error('请使用 2.2.3 或以上的基础库以使用云能力')
+    } else {
+      wx.cloud.init({
+        // env 参数说明：
+        //   env 参数决定接下来小程序发起的云开发调用（wx.cloud.xxx）会默认请求到哪个云环境的资源
+        //   此处请填入环境 ID, 环境 ID 可打开云控制台查看
+        //   如不填则使用默认环境（第一个创建的环境）
+        // env: 'test-f0b102',
+        traceUser: true,
+      })
+    }
+    this.globalData = {}
+    // 登录
+    console.log(wx.getStorageSync("accessToken"))
+    wx.login({
+      success: res => {
+        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        console.log(res)
+        // wxLogin
+        // ref.default.post(config.default.wxLogin.url, {
+        //   wxCode: res.code
+        // }, res => {
+        //   console.log(res)
+        // })
+      }
+    })
+  }
+})

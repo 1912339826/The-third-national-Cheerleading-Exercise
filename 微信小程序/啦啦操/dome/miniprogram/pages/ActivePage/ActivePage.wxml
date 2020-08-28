@@ -1,0 +1,8 @@
+<!--pages/ActivePage/ActivePage.wxml-->
+<!-- 活动 -->
+<view class="ActivePage">
+    <view class="content">
+      <image src="{{img}}" alt mode='widthFix'/>
+      <button bindtap="toDataInformation">我要参赛</button>
+    </view>
+  </view>

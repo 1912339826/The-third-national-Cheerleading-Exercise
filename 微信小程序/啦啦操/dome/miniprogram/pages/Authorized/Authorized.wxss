@@ -1,0 +1,18 @@
+/* pages/Authorized/Authorized.wxss */
+.Authorized {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.fix {
+  background-color: #09ba07;
+  color: #ffffff;
+}
+
+.massage {
+  height: 70rpx;
+  line-height: 70rpx;
+}

@@ -1,0 +1,20 @@
+{
+  "pages": [
+    "pages/DataInformation/DataInformation",
+    "pages/Authorized/Authorized",
+   
+    "pages/home/home",
+    "pages/success/success",
+    "pages/ActivePage/ActivePage"
+    
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

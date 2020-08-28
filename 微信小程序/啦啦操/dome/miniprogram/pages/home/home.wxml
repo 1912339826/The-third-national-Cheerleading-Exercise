@@ -1,0 +1,51 @@
+<!--pages/home/home.wxml-->
+<!-- 首页 -->
+
+<view class="home">
+	<image src="../../images/home_top.png" alt class="home_top" />
+	<view class="home_content">
+		<view class="from">
+			<view>
+
+
+				<view class="nav">请选择您所在城市</view>
+				<view class="hint">如未显示，请选择所属省下城市就近报名</view>
+				<view class="select">
+					<view class="son" bindtap="fun_provinceList"> <text></text> <text>{{province.text}}</text>
+						<van-icon name="arrow-down" />
+					</view>
+					<view class="son" bindtap="fun_cityList"> <text></text> <text>{{city.text}}</text>
+						<van-icon name="arrow-down" />
+					</view>
+
+				</view>
+			</view>
+			<view>
+				<view class="nav">请填写您的姓名</view>
+				<input type="text" bindinput="input_name" value="{{name}}" />
+			</view>
+			<view>
+				<view class="nav">请填写您的联系方式</view>
+				<input type="text" bindinput="input_phone" value="{{phone}}" />
+			</view>
+			<!-- 提示 -->
+			<view class="reminder">{{message}}</view>
+			<button bindtap="submit" wx:if="{{Ismessage}}">我要参赛</button>
+			<button bindtap="cansai" wx:if="{{!Ismessage}}">报名</button>
+			<view class="query_log">查询参赛记录 ></view>
+		</view>
+	</view>
+	<image src="../../images/home_cal.png" alt class="home_cal" />
+	<view class="activity_rules">
+		<view class="content">
+			<rich-text nodes="{{html}}"></rich-text>
+		</view>
+		<image src="../../images/home_bottom.png" alt class="home_bottom" />
+	</view>
+</view>
+
+<van-popup show="{{show}}" bind:close="onClose" position="bottom" z-index="9999">
+	<van-picker title="请选择" show-toolbar="true" default-index="{{ change_picker }}" columns="{{ columns }}" bind:confirm="onConfirm" bind:cancel="onCancel" />
+</van-popup>
+
+<van-toast id="van-toast" />
