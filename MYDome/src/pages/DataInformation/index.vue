@@ -25,33 +25,7 @@
             <!-- 上传成功之后 -->
             <img :src="Isimg" alt v-else class="file" />
           </div>
-          <!-- <form
-            action
-            method="post"
-            enctype="multipart/form-data"
-            id="fileFrom"
-            target="uploadFrame"
-          >
-            <input
-              type="file"
-              name
-              id="file"
-              @change="file($event)"
-              accept="image/*"
-              style="display:none"
-            />
-          </form>
-          <iframe id="uploadFrame" name="uploadFrame" style="display:none;"></iframe>
-          <label for="file">
-            <img src="../../../static/images/ready.png" alt class="ready" v-if="Isimg==''" />
-            <img :src="Isimg" alt v-else class="file" />
-          </label>-->
         </div>
-        <!-- <nav>
-          <img src="../../../static/images/transpond_03.png" alt />
-          <div>请填写转发数据(注:微信截图参赛可不填)</div>
-        </nav>
-        <input type="text" placeholder="抖音转发数据" v-model="forward" /> -->
         <nav>
           <img src="../../../static/images/comment_03.png" alt />
           <div>请填写评论数据</div>
@@ -109,26 +83,18 @@ export default {
       formData.append("file", file.file);
       this.UploadPhotos(formData);
     },
-    // file(e) {
-    //   let files = document.getElementById("file");
-    //   var formData = new window.FormData();
-    //   formData.append("file", files.files[0]);
-    //   this.UploadPhotos(formData);
-    // },
     UploadPhotos(files) {
       this.is_loading = true;
       let url = `${window.BASE_URLA}/info/import`;
       let formData = files;
       this.instance.post(url, formData).then((res) => {
         this.Isimg = res.data.result.url;
-        // this.fileList[0].url = res.data.result.url;
         this.is_loading = false;
       });
       this.fileList = [{ url: "" }];
     },
     async InfoSubmit() {
       let res = await this.$req(window.api.InfoSubmit, {
-        // forward: Number(this.forward),
         comment: Number(this.comment),
         pic: this.Isimg,
         likes: Number(this.likes),

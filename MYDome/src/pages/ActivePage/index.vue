@@ -3,13 +3,17 @@
     <NavTab />
     <div class="content">
       <img :src="img" alt />
-      <!-- <button @click="toDataInformation">我要参赛</button> -->
+      <button @click="toDataInformation">我要参赛</button>
     </div>
     <Popup v-model="show" @click-overlay="close">
       <div class="ispopup">
         <nav style="text-align:center;">请选择参赛类型：</nav>
         <div>
-          <RadioGroup v-model="radio" direction="horizontal" style="display:flex;justify-content: space-around;">
+          <RadioGroup
+            v-model="radio"
+            direction="horizontal"
+            style="display:flex;justify-content: space-around;"
+          >
             <Radio name="1">普通赛场</Radio>
             <Radio name="2">黄金赛场</Radio>
           </RadioGroup>
@@ -33,7 +37,7 @@ export default {
     Radio,
     RadioGroup,
     Popup,
-    Button
+    Button,
   },
   props: {},
   data() {
@@ -41,8 +45,8 @@ export default {
       IsfindCurrentActivity: "",
       img: "",
       id: "",
-      show: false,
-      radio: "1"
+      show: true,
+      radio: "1",
     };
   },
   created() {
@@ -52,25 +56,25 @@ export default {
   activated() {},
   update() {},
   methods: {
-    QuickMark(){
-      // this.close();
-      // if(this.radio != "1"){
-      //   this.$router.push("/QuickMark")
-      // }else{
+    QuickMark() {
+      this.close();
+      if (this.radio != "1") {
+        this.$router.push("/QuickMark");
+      } else {
         this.$router.push({ path: "/DataInformation", query: { id: this.id } });
-      // }
+      }
     },
-    close(){
+    close() {
       this.show = false;
     },
     async findCurrentActivity() {
-      let res = await this.$req(window.api.findCurrentActivity, {type:0});
+      let res = await this.$req(window.api.findCurrentActivity, { type: 0 });
       this.img = res.data.result.pic;
       this.id = res.data.result.id;
     },
     toDataInformation() {
-      // this.show = true;
-      this.QuickMark()
+      this.show = true;
+      this.QuickMark();
     },
   },
   filters: {},

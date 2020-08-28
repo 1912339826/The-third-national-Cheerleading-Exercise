@@ -13,7 +13,7 @@ export default {
   // baseUrl: BASE_URLA,
   BASE_URLA,
   // 城市信息
-  cityTree:`${BASE_URLA}/city/cityTree`,
+  cityTree: `${BASE_URLA}/city/cityTree`,
   // 报名
   signAdd: `POST ${BASE_URLA}/sign/signAdd`,
   // 获取最新活动信息/活动规则
@@ -21,7 +21,7 @@ export default {
   // 照片上传 
   UploadPhotos: `POST ${BASE_URLA}/info/import`,
   //参赛信息 
-  InfoSubmit:`POST ${BASE_URLA}/info/submit`,
+  InfoSubmit: `POST ${BASE_URLA}/info/submit`,
   // 我的报名列表
   myInfoList: `${BASE_URLA}/info/myInfoList`,
   // 获取排名 
@@ -29,11 +29,11 @@ export default {
   // 未登录,重定向
   toAuthIndex: `${BASE_URLA}/toAuthIndex`,
   // 验证登录
-  checkLogin:`POST ${BASE_URLA}/sign/checkLogin`,
+  checkLogin: `POST ${BASE_URLA}/sign/checkLogin`,
   // 父城市
-  getParentCity:`${BASE_URLA}/city/getParentCity`,
+  getParentCity: `${BASE_URLA}/city/getParentCity`,
   // 查询成绩 
-  findAchievement:`${BASE_URLA}/info/findAchievement`,
+  findAchievement: `${BASE_URLA}/info/findAchievement`,
   // 二维码图片
-  getQrCode:`${BASE_URLA}/activity/getQrCode`
+  getQrCode: `${BASE_URLA}/activity/getQrCode`
 };
