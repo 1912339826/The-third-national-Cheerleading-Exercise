@@ -5,9 +5,6 @@ App({
   ref: ref,
   config: config,
   onLaunch: function (options) {
-    console.log(options)
-    console.log(wx.getLaunchOptionsSync())
-    wx.removeStorageSync('accessToken')
     if (options.scene == 1101 ||options.scene == 1011) {
       // 判断是二维码进入
       console.log(options.query.sceneId)

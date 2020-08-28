@@ -1,7 +1,6 @@
 function myrequest(url, method, param, successCallback, failCallback) {
     console.log('准备发起请求 :>> ', url);
     var _this = this;
-    console.log(wx.getStorageSync("accessToken"),'111')
     wx.request({
         url: url,
         data: param,

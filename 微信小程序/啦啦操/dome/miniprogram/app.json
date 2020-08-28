@@ -2,8 +2,6 @@
   "pages": [
     "pages/home/home",
     "pages/DataInformation/DataInformation",
-    
-    
     "pages/Authorized/Authorized",
     "pages/success/success",
     "pages/ActivePage/ActivePage"
