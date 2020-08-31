@@ -6,7 +6,7 @@
 		<view class="from">
 			<view class="nav">
 				<image src="../../images/screenshot_03.png" alt />
-				<view>上传您的微信朋友圈截图(或者视频)、抖音截图(或者视频)(注:图片大小请限制在1MB以内!)</view>
+				<view>上传当场赛事朋友圈截图或抖音截图：(注:图片大小请限制在1MB以内!)</view>
 			</view>
 			<view class="ready_box">
 				<view class="img">
@@ -22,7 +22,7 @@
 						<image src="{{Isimg}}" alt wx:else class="file" />
 					</view>
 				</view>
-				<view class="nav">上传视频相关文件，请选择其中一种：（二选一）</view>
+				<view class="nav">上传当场参赛视频或视频海报，请选择其中一种：（二选一）</view>
 				<view class="either_or">
 					<view class="box">
 						<view class="nav">视频：</view>
@@ -42,7 +42,7 @@
 						</view>
 					</view>
 					<view class="box">
-						<view class="nav">视频截图：</view>
+						<view class="nav">视频海报：</view>
 						<view class="img">
 							<view class="van_uploader">
 								<van-uploader bind:after-read="afterRead_videoScreenshot" deletable="false" bind:oversize="fun_oversize" preview-image="false" />
@@ -64,12 +64,12 @@
 			</view>
 			<view class="nav">
 				<image src="../../images/comment_03.png" alt />
-				<view>请填写评论数据</view>
+				<view>请填写评论数据：（必填）</view>
 			</view>
 			<input type="text" placeholder="评论数据" bindinput="input_comment" model:value="{{comment}}" />
 			<view class="nav">
 				<image src="../../images/Like_03.png" alt />
-				<view>请填写点赞数据</view>
+				<view>请填写点赞数据：（必填）</view>
 			</view>
 			<input type="text" placeholder="点赞数据" bindinput="input_tlikes" model:value="{{likes}}" />
 			<view wx:if="{{!!hasNormal_my}}">
@@ -82,6 +82,18 @@
 						</view>
 						<view class="no" wx:else>
 							<image src="../../images/pane.png" class="pane_img"></image>
+						</view>
+					</view>
+				</view>
+			</view>
+			<!-- 已经参加了普通赛场 -->
+			<view wx:if="{{!hasNormal_my}}">
+				<view class="bilocation" bindtap="hasNormal_message">
+					<view>是否同时参加“普通赛场”?</view>
+					<view class="img">
+						<view class="yes">
+							<image src="../../images/pane.png" class="pane_img"></image>
+							<image src="../../images/right.png" class="right_img"></image>
 						</view>
 					</view>
 				</view>

@@ -14,6 +14,10 @@ import ActivePage from '../pages/ActivePage/index'
 import WeekOfCity from '../pages/WeekOfCity/index'
 // 扫描二维码页面
 import QuickMark from '../pages/QuickMark/index.vue'
+// 申请发票
+import ApplyInvoice from '../pages/ApplyInvoice/index.vue'
+// 黄金赛排名
+import GoldRanking from '../pages/GoldRanking/index.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -78,6 +82,24 @@ export default new Router({
       meta: {
         KeepAlive: false,
         title:"扫描二维码"
+      }
+    },
+    {
+      path: '/ApplyInvoice',
+      name: 'ApplyInvoice',
+      component: ApplyInvoice,
+      meta: {
+        KeepAlive: false,
+        title:"申请发票"
+      }
+    },
+    {
+      path: '/GoldRanking',
+      name: 'GoldRanking',
+      component: GoldRanking,
+      meta: {
+        KeepAlive: false,
+        title:"黄金赛排名"
       }
     }
   ]

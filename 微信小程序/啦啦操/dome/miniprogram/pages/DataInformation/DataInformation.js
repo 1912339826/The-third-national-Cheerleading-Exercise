@@ -45,6 +45,7 @@ Page({
       title: "数据信息" //页面标题为路由参数
     })
   },
+  // 验证是否参加过普通场
   hasNormal(activityId) {
     fun_ref.get(fun_config.hasNormal.url, {
       activity: activityId
@@ -61,6 +62,9 @@ Page({
         })
       }
     })
+  },
+  hasNormal_message() {
+    Toast.fail('已参加过普通赛场！')
   },
   findIsPay(activityId) {
     fun_ref.get(fun_config.findIsPay.url, {
@@ -209,7 +213,7 @@ Page({
     // console.log(file)
     // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
     wx.uploadFile({
-      url: fun_config.UploadPhotos.url, // 仅为示例，非真实的接口地址
+      url: fun_config.UploadPhotos.url, //真实的接口地址
       filePath: file.path,
       name: 'file',
       success(res) {
@@ -223,6 +227,9 @@ Page({
           }]
         })
       },
+      file(err) {
+        console.log(err)
+      }
     });
   },
 

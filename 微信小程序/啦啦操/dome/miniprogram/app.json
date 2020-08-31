@@ -2,9 +2,9 @@
   "pages": [
     "pages/home/home",
     "pages/DataInformation/DataInformation",
+    "pages/ActivePage/ActivePage",
     "pages/Authorized/Authorized",
-    "pages/success/success",
-    "pages/ActivePage/ActivePage"
+    "pages/success/success"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

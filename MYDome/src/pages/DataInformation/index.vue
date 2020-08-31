@@ -6,7 +6,7 @@
       <div class="from">
         <nav>
           <img src="../../../static/images/screenshot_03.png" alt />
-          <div>上传您的微信朋友圈截图、抖音截图(注:图片大小请限制在1MB以内!)</div>
+          <div>上传当场赛事朋友圈截图或抖音截图：(注:图片大小请限制在1MB以内!)</div>
         </nav>
        
         <div class="ready_box">
@@ -28,12 +28,12 @@
         </div>
         <nav>
           <img src="../../../static/images/comment_03.png" alt />
-          <div>请填写评论数据</div>
+          <div>请填写评论数据：（必填）</div>
         </nav>
         <input type="text" placeholder="评论数据" v-model="comment" />
         <nav>
           <img src="../../../static/images/Like_03.png" alt />
-          <div>请填写点赞数据</div>
+          <div>请填写点赞数据：（必填）</div>
         </nav>
         <input type="text" placeholder="点赞数据" v-model="likes" />
         <button @click="submit">提交参赛凭证</button>

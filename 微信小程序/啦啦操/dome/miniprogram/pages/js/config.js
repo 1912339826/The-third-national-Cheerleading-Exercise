@@ -5,11 +5,12 @@
 
 let envVersion = wx.getAccountInfoSync().miniProgram.envVersion
 if (!envVersion || envVersion == "develop") {
-  // var BASE_URLA = "https://llc.njqiahao.com/api";
+  var BASE_URLA = "https://llc.njqiahao.com/api";
   //  var BASE_URLA = "http://106.54.252.48:8091";
-  var BASE_URLA = "http://192.168.5.157:8091";
+  // var BASE_URLA = "http://192.168.5.157:8091";
 } else if (envVersion == "trial") {
   var BASE_URLA = "https://llc.njqiahao.com/api";
+  // var BASE_URLA = "http://192.168.5.157:8091";
 } else if (envVersion == "release") {
   var BASE_URLA = "https://llc.njqiahao.com/api";
 }

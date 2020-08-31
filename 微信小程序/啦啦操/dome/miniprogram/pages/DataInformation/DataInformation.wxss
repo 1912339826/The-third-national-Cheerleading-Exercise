@@ -55,7 +55,7 @@
 
 .either_or{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   height: 310rpx;
   width: 80%;
 }

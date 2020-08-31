@@ -24,9 +24,9 @@
         <td>{{status[item.status]}}</td>
       </tr>
     </table>
-  </div>
+  </div> 
 </template>
-
+// 开票  证书 邮寄地址       
 <script>
 import { Toast } from 'vant';
 import NavTab from '../../components/Isnav'

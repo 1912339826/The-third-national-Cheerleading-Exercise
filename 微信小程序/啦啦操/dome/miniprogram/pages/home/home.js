@@ -34,6 +34,11 @@ Page({
     wx.setNavigationBarTitle({
       title: "首页" //页面标题为路由参数
     })
+    this.cityTree();
+    this.findCurrentActivity();
+  },
+
+  cansai() {
     let that = this
     wx.getSetting({
       success(res) {
@@ -41,8 +46,7 @@ Page({
         // console.log(res.authSetting["scope.userInfo"])
         let userInfo = res.authSetting["scope.userInfo"]
         if (userInfo) {
-          that.cityTree();
-          that.findCurrentActivity();
+          that.signAdd();
         } else {
           wx.redirectTo({
             url: '../Authorized/Authorized?page_name=home',
@@ -50,11 +54,6 @@ Page({
         }
       }
     })
-
-  },
-
-  cansai() {
-    this.signAdd();
   },
   async checkLogin() {
     fun_ref.post(fun_config.checkLogin.url, {}, res => {
@@ -112,7 +111,7 @@ Page({
   },
   async findCurrentActivity() {
     fun_ref.get(fun_config.findCurrentActivity.url, {
-      type: 0
+      type: 1
     }, res => {
       this.setData({
         html: res.data.result.rule
