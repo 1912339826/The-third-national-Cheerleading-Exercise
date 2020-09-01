@@ -1,8 +1,5 @@
 <!--pages/Authorized/Authorized.wxml-->
-
 <view class="Authorized">
-	<!-- <image class="logo" src="../../images/logo_03.png" mode='widthFix'></image> -->
-	<!-- logo_03 (2) -->
 	<image class="logo" src="../../images/logo_03.png" mode='widthFix'></image>
 	<view class="name">啦啦操创展大会黄金赛场 </view>
 	<view class="massage">
