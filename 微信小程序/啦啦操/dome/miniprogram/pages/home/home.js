@@ -43,15 +43,15 @@ Page({
     wx.getSetting({
       success(res) {
         // 是否授过权
-        // console.log(res.authSetting["scope.userInfo"])
         let userInfo = res.authSetting["scope.userInfo"]
         if (userInfo) {
           that.signAdd();
         } else {
-          wx.redirectTo({
+          wx.navigateTo({
             url: '../Authorized/Authorized?page_name=home',
           })
         }
+        
       }
     })
   },
@@ -80,7 +80,6 @@ Page({
     })
   },
   getParentCity(id) {
-    // console.log(this.data.province, this.data.cityList, this.data.city)
     fun_ref.get(fun_config.getParentCity.url, {
       cityId: id
     }, res => {
@@ -149,10 +148,8 @@ Page({
       type: 1,
       openId: wx.getStorageSync("openid")
     }, res => {
-      console.log(res.data)
       let status = res.data.status;
       if (status == 200) {
-        console.log(res.data.result.token)
         wx.setStorageSync("accessToken", res.data.result.token);
         Toast.success("报名成功!");
         this.setData({

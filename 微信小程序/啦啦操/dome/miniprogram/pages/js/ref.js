@@ -1,5 +1,5 @@
 function myrequest(url, method, param, successCallback, failCallback) {
-    console.log('准备发起请求 :>> ', url);
+    console.log('准备发起请求 :>> ');
     var _this = this;
     wx.request({
         url: url,
@@ -19,7 +19,6 @@ function myrequest(url, method, param, successCallback, failCallback) {
             }
         },
         fail: (res) => {
-            console.log(res)
             if (failCallback) {
                 failCallback(res);
             }

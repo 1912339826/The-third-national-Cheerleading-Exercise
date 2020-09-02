@@ -24,12 +24,11 @@ Page({
     wx.getSetting({
       success(res) {
         // 是否授过权
-        // console.log(res.authSetting["scope.userInfo"])
         let userInfo = res.authSetting["scope.userInfo"]
         if (userInfo) {
           that.findCurrentActivity()
         } else {
-          wx.redirectTo({
+          wx.navigateTo({
             url: '../Authorized/Authorized?page_name=ActivePage',
           })
         }
@@ -50,14 +49,12 @@ Page({
     fun_ref.get(
       fun_config.findCurrentActivity.url, {},
       res => {
-        // console.log('成功了 :>> ', res);
         this.setData({
           img: res.data.result.pic,
           id: res.data.result.id
         })
       },
       er => {
-        // console.log('失败了 :>> ', er);
       })
 
   },

@@ -2,7 +2,7 @@
   <div id="GoldRanking">
     <NavTab />
     <div class="content">
-      <nav>11</nav>
+      <nav>{{IsgetRank}}</nav>
     </div>
   </div>
 </template>
@@ -16,7 +16,9 @@ export default {
   },
   props: {},
   data() {
-    return {};
+    return {
+      IsgetRank: "赛事成绩，关注大会微信公众号进入《黄金赛事圈》成绩查询专区",
+    };
   },
   created() {},
   mounted() {},
@@ -45,6 +47,7 @@ export default {
     height: 6vw;
     line-height: 6vw;
     padding-top: 42vh;
+    text-align: justify;
   }
 }
 </style>

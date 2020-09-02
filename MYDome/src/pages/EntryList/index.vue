@@ -13,9 +13,9 @@
         :key="index"
         class="list"
         style
-        @click="Toranking(item.activityId)"
+        @click="Toranking(item.activityId,item.type)"
       >
-        <td>
+        <td style="text-align:justify;padding-left:1w;">
           <div>
             <a href="#">第三届全国啦啦操创意展示大会文化创意视频网络大赛</a>
           </div>
@@ -27,7 +27,7 @@
           <!-- // 申请开票(黄金赛事) 邮寄地址 下载证书 -->
           <button @click.stop="go_ApplyInvoice">申请开票</button>
           <button @click.stop="mailing_address(item.id)">邮寄地址</button>
-          <button @click.stop="Download_certificate(item.id)" v-if="!!item.isDownload">下载证书</button>
+          <button @click.stop="Download_certificate(item.id,item.type)" v-if="!!item.isDownload">下载证书</button>
         </td>
       </tr>
     </table>
@@ -114,16 +114,17 @@ export default {
       this.show = false;
     },
     // 下载证书
-    Download_certificate(id) {
+    Download_certificate(id,type) {
       this.id = id;
-      this.getAdmission();
+      this.getAdmission(type);
     },
-    async getAdmission() {
+    async getAdmission(type) {
       let res = await this.$req(window.api.getAdmission, {
-        type: 1,
+        type: type,
         infoId: this.id,
       });
-      window.open = res.data;
+      console.log(res)
+      window.location.href = res.data;
     },
     // 邮寄地址
     mailing_address(id) {
@@ -146,19 +147,23 @@ export default {
       let getDate = datas.getDate();
       return `${year}-${month}-${getDate}`;
     },
-    Toranking(id) {
-      this.getRank(id);
+    Toranking(id, type) {
+      this.getRank(id, type);
     },
     // 获取排名
-    async getRank(id) {
+    async getRank(id, type) {
       let res = await this.$req(window.api.getRank, {
         activityId: id,
-        type: 0,
+        type: type,
       });
       if (!res.data.success) {
         Toast.fail(res.data.message);
       } else {
-        this.$router.push({ path: "/ranking", query: { id: id } });
+        if (!!type) {
+          this.$router.push({ path: "/GoldRanking", query: { id: id } });
+        } else {
+          this.$router.push({ path: "/ranking", query: { id: id } });
+        }
       }
     },
   },
@@ -167,7 +172,7 @@ export default {
   watch: {},
 };
 </script>
-
+eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI4ODg4ODg5OTQ0MSIsImV4cCI6MTgxOTc2NjM1MSwidXNlcklkIjoiYTZjODNiZWUwMGM1NGQ3NDkyNzNmNmJjMjg3NjM1YWYiLCJjcmVhdGVkIjoxNTk5MDE0MzUxNDAxfQ.q6PfEBwBlLKBmBMFsynhA6pOh6wyX4dYMsMjTWi1ksWaYtIfheCHOouhwamf4n_wk5nd8zU5GOp7dlwuX7dTzQ
 <style lang="less" scoped>
 #EntryList {
   height: 100vh;

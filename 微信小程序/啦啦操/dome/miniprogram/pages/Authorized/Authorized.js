@@ -15,7 +15,6 @@ Page({
     wx.setNavigationBarTitle({
       title: "授权登录" //页面标题为路由参数
     })
-    console.log(options.page_name)
     this.setData({
       page_name: options.page_name
     })
@@ -35,13 +34,15 @@ Page({
 
   },
   onGotUserInfo(e) {
-    // console.log(e)
     let message = e.detail.errMsg
     if (message == "getUserInfo:ok") {
       // 允许
       
-      wx.redirectTo({
-        url: `../${this.data.page_name}/${this.data.page_name}`,
+      // wx.redirectTo({
+      //   url: `../${this.data.page_name}/${this.data.page_name}`,
+      // })
+      wx.navigateBack({
+        delta: 1,
       })
     } else {
       // 拒绝

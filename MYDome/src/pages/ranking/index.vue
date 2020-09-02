@@ -8,11 +8,11 @@
       </nav>
       <section>
         <div class="two">
-          <img :src="IsgetRank[0].avatarPic" alt @error="imgError($event)" />
+          <img :src="IsgetRank[1].avatarPic" alt @error="imgError($event)" />
           <div>{{IsgetRank[1].userName}}</div>
         </div>
         <div class="one">
-          <img :src="IsgetRank[1].avatarPic" alt @error="imgError($event)" />
+          <img :src="IsgetRank[0].avatarPic" alt @error="imgError($event)" />
           <div>{{IsgetRank[0].userName}}</div>
         </div>
         <div class="three">

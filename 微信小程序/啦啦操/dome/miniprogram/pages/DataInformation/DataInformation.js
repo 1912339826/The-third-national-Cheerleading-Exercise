@@ -40,7 +40,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     wx.setNavigationBarTitle({
       title: "数据信息" //页面标题为路由参数
     })
@@ -70,7 +69,6 @@ Page({
     fun_ref.get(fun_config.findIsPay.url, {
       activityId: activityId
     }, res => {
-      // console.log(res.data.result)
       if (!res.data.result) {
         // 未支付
         Dialog.confirm({
@@ -86,8 +84,11 @@ Page({
           })
           .catch(() => {
             // 取消
-            wx.redirectTo({
-              url: '../home/home',
+            // wx.redirectTo({
+            //   url: '../home/home',
+            // })
+            wx.navigateBack({
+              delta: 1,
             })
           });
       } else {
@@ -101,7 +102,6 @@ Page({
     fun_ref.get(
       fun_config.findCurrentActivity.url, {},
       res => {
-        // console.log('成功了 :>> ', res);
         this.setData({
           id: res.data.result.id
         }, function () {
@@ -115,7 +115,6 @@ Page({
         })
       },
       er => {
-        // console.log('失败了 :>> ', er);
       })
 
   },
@@ -169,7 +168,6 @@ Page({
     fun_ref.post(fun_config.payment_wxPay.url, {
       activityId: activityId
     }, res => {
-      // console.log(res.data.success)
       if (res.data.success) {
         this.pay(res.data.result.timeStamp, res.data.result.nonceStr, res.data.result.package, res.data.result.sign)
       } else {
@@ -181,7 +179,6 @@ Page({
     })
   },
   pay(timeStamp, nonceStr, prepayid, paySign) {
-    // console.log(timeStamp, nonceStr, prepayid, paySign)
 
     wx.requestPayment({
       timeStamp: `${timeStamp}`,
@@ -190,11 +187,9 @@ Page({
       signType: 'MD5',
       paySign: paySign, //
       success: function (res) {
-        // console.log(res)
         Toast.success("支付成功！");
       },
       fail: function (res) {
-        // console.log(res)
         Toast.fail('支付失败！');
       }
     })
@@ -210,7 +205,6 @@ Page({
     const {
       file
     } = event.detail;
-    // console.log(file)
     // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
     wx.uploadFile({
       url: fun_config.UploadPhotos.url, //真实的接口地址
@@ -218,7 +212,6 @@ Page({
       name: 'file',
       success(res) {
         // 上传完成需要更新 fileList
-        // console.log(JSON.parse(res.data).result.url)
         this_.setData({
           Isimg: JSON.parse(res.data).result.url,
           is_loading: false,
@@ -243,7 +236,6 @@ Page({
     const {
       file
     } = event.detail;
-    // console.log(file)
     // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
     wx.uploadFile({
       url: fun_config.UploadPhotos.url, // 仅为示例，非真实的接口地址
@@ -251,7 +243,6 @@ Page({
       name: 'file',
       success(res) {
         // 上传完成需要更新 fileList
-        // console.log(JSON.parse(res.data).result.url)
         this_.setData({
           videoScreenshot: JSON.parse(res.data).result.url,
           videoScreenshot_loading: false,
@@ -276,7 +267,6 @@ Page({
       compressed: false,
       camera: 'back',
       success: function (res) {
-        // console.log(res)
         that.setData({
           file: {
             url: res.tempFilePath,
@@ -289,7 +279,6 @@ Page({
         uploader.startUpload()
       },
       fail: function (err) {
-        // console.log(err)
         if (err.errMsg == "chooseVideo:fail cancel") {
           that.setData({
             is_loading_video: false
@@ -313,19 +302,16 @@ Page({
     fun_ref.get(fun_config.getPlayInfo_info.url, {
       videoId: videoId
     }, res => {
-      // console.log(res)
       return res.data.result;
     })
   },
   // 获取视频上传凭证
   getPlayInfo_uploadInfo(title, fileName, url, uploadInfo) {
-    // console.log(uploadInfo.videoId)
     let timestamp = (new Date()).valueOf();
     fun_ref.get(fun_config.getPlayInfo_uploadInfo.url, {
       title: timestamp,
       fileName: fileName
     }, res => {
-      // console.log(res.data.result, "111")
       this.setData({
         uploadAuth: res.data.result.uploadAuth,
         uploadAddress: res.data.result.uploadAddress,
@@ -342,7 +328,6 @@ Page({
     fun_ref.post(fun_config.getPlayInfo_refreshUploadInfo.url, {
       videoId: videoId
     }, res => {
-      // console.log(res, "111")
       this.setData({
         uploadAuth: res.data.result.uploadAuth,
         uploadAddress: res.data.result.uploadAddress,
@@ -370,7 +355,6 @@ Page({
 
       // 添加文件成功
       addFileSuccess: function (uploadInfo) {
-        // console.log(uploadInfo)
         Toast.loading({
           duration: 0,
           message: '添加文件成功',
@@ -387,7 +371,6 @@ Page({
         // that.setData({
         //   is_loading_video: true
         // })
-        // console.log("onUploadStarted:" + uploadInfo.file.name + ", endpoint:" + uploadInfo.endpoint + ", bucket:" + uploadInfo.bucket + ", object:" + uploadInfo.object);
         //上传方式1, 需要根据uploadInfo.videoId是否有值，调用点播的不同接口获取uploadauth和uploadAddress，如果videoId有值，调用刷新视频上传凭证接口，否则调用创建视频上传凭证接口
         // if (!!uploadInfo.videoId) {
         //   that.setData({
@@ -407,7 +390,6 @@ Page({
       },
       // 文件上传成功
       onUploadSucceed: function (uploadInfo) {
-        // console.log(uploadInfo)
         that.setData({
           afterRead_video_img: F
         }, function () {
@@ -418,16 +400,13 @@ Page({
       },
       // 文件上传失败
       onUploadFailed: function (uploadInfo, code, message) {
-        // console.log(uploadInfo, code, message)
         Toast.fail("上传失败")
       },
       // 文件上传进度，单位：字节
       onUploadProgress: function (uploadInfo, totalSize, loadedPercent) {
-        // console.log(uploadInfo, totalSize, loadedPercent)
       },
       // 上传凭证超时
       onUploadTokenExpired: function (uploadInfo) {
-        // console.log(uploadInfo)
         console.log("onUploadTokenExpired");
         //实现时，根据uploadInfo.videoId调用刷新视频上传凭证接口重新获取UploadAuth
         //https://help.aliyun.com/document_detail/55408.html
@@ -436,7 +415,6 @@ Page({
       },
       //全部文件上传结束
       onUploadEnd: function (uploadInfo) {
-        // console.log(uploadInfo)
         console.log("onUploadEnd: uploaded all the files");
         that.setData({
           is_loading_video: false
@@ -468,7 +446,6 @@ Page({
     wx.getSetting({
       success(res) {
         // 是否授过权
-        // console.log(res.authSetting["scope.userInfo"])
         let userInfo = res.authSetting["scope.userInfo"]
         if (userInfo) {
           that.findCurrentActivity()

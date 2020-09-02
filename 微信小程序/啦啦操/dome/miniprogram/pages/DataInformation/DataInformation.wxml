@@ -91,9 +91,8 @@
 				<view class="bilocation" bindtap="hasNormal_message">
 					<view>是否同时参加“普通赛场”?</view>
 					<view class="img">
-						<view class="yes">
+						<view class="no">
 							<image src="../../images/pane.png" class="pane_img"></image>
-							<image src="../../images/right.png" class="right_img"></image>
 						</view>
 					</view>
 				</view>
