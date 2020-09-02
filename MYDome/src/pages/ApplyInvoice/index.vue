@@ -13,7 +13,7 @@
     />
 
     <template v-if="value=='个人'">
-      <Field name="name" v-model="personage.name" label="姓名" placeholder="请填写姓名" />
+      <!-- 0 -->
       <Field
         name="ID_number"
         type="number"
@@ -59,7 +59,6 @@ export default {
       value: "个人",
       //   个人
       personage: {
-        name: "",
         ID_number: "",
         E_mail: "",
       },
@@ -87,21 +86,15 @@ export default {
       this.show = false;
     },
     submit() {
-      //   Toast.loading({
-      //     message: "提交中...",
-      //     forbidClick: true,
-      //   });
+      let { name, number, E_mail, G } = "";
       if (this.value == "个人") {
-        console.log(this.personage);
-        if (
-          this.personage.name == "" ||
-          this.personage.ID_number == "" ||
-          this.personage.E_mail == ""
-        ) {
+        if (this.personage.ID_number == "" || this.personage.E_mail == "") {
           Toast.fail("请填写完整！");
         } else {
-          //   this.personage;
-          console.log(this.personage);
+          number = this.personage.ID_number;
+          E_mail = this.personage.E_mail;
+          G = true;
+          this.submitInvoice(name, number, E_mail, G);
         }
       } else {
         if (
@@ -111,8 +104,41 @@ export default {
         ) {
           Toast.fail("请填写完整！");
         } else {
-          //   this.enterprise;
+          name = this.enterprise.name;
+          number = this.enterprise.duty_paragraph;
+          E_mail = this.enterprise.E_mail;
+          G = false;
+          this.submitInvoice(name, number, E_mail, G);
         }
+      }
+    },
+    async submitInvoice(name, number, E_mail, G) {
+      Toast.loading({
+        message: "加载中...",
+        forbidClick: true,
+      });
+      let { cardCode, company, type, taxNumber, email } = "";
+      email = E_mail;
+      if (G) {
+        // 个人
+        cardCode = number;
+        type = 0;
+      } else {
+        taxNumber = number;
+        company = name;
+        type = 1;
+      }
+      let res = await this.$req(window.api.submitInvoice, {
+        cardCode: cardCode,
+        company: company,
+        type: type,
+        taxNumber: taxNumber,
+        email: email,
+      });
+      if (res.data.success) {
+        Toast.success("提交成功！");
+      } else {
+        Toast.fail(res.data.message);
       }
     },
   },

@@ -1,6 +1,7 @@
 if (process.env.NODE_ENV == "development") {
   // 开发
-  var BASE_URLA = "http://106.54.252.48:8091";
+  // var BASE_URLA = "http://106.54.252.48:8091";
+  var BASE_URLA = "http://192.168.5.157:8091";
 } else if (process.env.NODE_ENV == "debug") {
   // debug
   var BASE_URLA = "http://192.168.0.151:8086";
@@ -35,5 +36,11 @@ export default {
   // 查询成绩 
   findAchievement: `${BASE_URLA}/info/findAchievement`,
   // 二维码图片
-  getQrCode: `${BASE_URLA}/activity/getQrCode`
+  getQrCode: `${BASE_URLA}/activity/getQrCode`,
+  // 申请开票
+  submitInvoice: `POST ${BASE_URLA}/invoice/submitInvoice`,
+  // 邮寄地址
+  addAddress:`POST ${BASE_URLA}/info/addAddress`,
+  // 证书下载
+  getAdmission:`POST ${BASE_URLA}/info/getAdmission`,
 };

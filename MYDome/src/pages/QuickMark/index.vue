@@ -1,7 +1,7 @@
 <template>
   <div id="QuickMark">
     <NavTab />
-    <nav>请用微信扫描下方二维码，前往微信小程序</nav>
+    <nav>长按识别下方二维码，进入黄金赛事</nav>
     <div class="box">
       <div class="loading" v-if="img_">
         <Loading />
@@ -60,13 +60,13 @@ nav {
   justify-content: center;
   margin-top: 10vw;
   .isimg {
-    width: 90vw;
-    height: 90vw;
+    width: 70vw;
+    height: 70vw;
   }
 }
 .loading {
-  width: 90vw;
-  height: 90vw;
+  width: 70vw;
+  height: 70vw;
   display: flex;
   justify-content: center;
   align-items: center;
