@@ -17,7 +17,7 @@ export default {
   props: {},
   data() {
     return {
-      IsgetRank: "赛事成绩，关注大会微信公众号进入《黄金赛事圈》成绩查询专区",
+      IsgetRank: "赛事成绩 关注大会微信公众号进入《黄金赛事圈》成绩查询专区",
     };
   },
   created() {},
@@ -42,12 +42,15 @@ export default {
     color: #fff;
   }
   nav {
-    font-size: 0.35rem;
+    font-size: 0.4rem;
     text-align: center;
     height: 6vw;
-    line-height: 6vw;
-    padding-top: 42vh;
-    text-align: justify;
+    line-height: 9vw;
+    padding-top: 45vh;
+    width: 82vw;
+    margin: 0 auto;
+    font-weight: 600;
+    
   }
 }
 </style>

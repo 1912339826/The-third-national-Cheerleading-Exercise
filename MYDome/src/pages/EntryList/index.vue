@@ -27,7 +27,10 @@
           <!-- // 申请开票(黄金赛事) 邮寄地址 下载证书 -->
           <button @click.stop="go_ApplyInvoice">申请开票</button>
           <button @click.stop="mailing_address(item.id)">邮寄地址</button>
-          <button @click.stop="Download_certificate(item.id,item.type)" v-if="!!item.isDownload">下载证书</button>
+          <button
+            @click.stop="Download_certificate(item.id,item.type)"
+            v-if="!!item.isDownload"
+          >下载证书</button>
         </td>
       </tr>
     </table>
@@ -114,7 +117,7 @@ export default {
       this.show = false;
     },
     // 下载证书
-    Download_certificate(id,type) {
+    Download_certificate(id, type) {
       this.id = id;
       this.getAdmission(type);
     },
@@ -123,7 +126,7 @@ export default {
         type: type,
         infoId: this.id,
       });
-      console.log(res)
+      console.log(res);
       window.location.href = res.data;
     },
     // 邮寄地址
@@ -172,7 +175,6 @@ export default {
   watch: {},
 };
 </script>
-eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI4ODg4ODg5OTQ0MSIsImV4cCI6MTgxOTc2NjM1MSwidXNlcklkIjoiYTZjODNiZWUwMGM1NGQ3NDkyNzNmNmJjMjg3NjM1YWYiLCJjcmVhdGVkIjoxNTk5MDE0MzUxNDAxfQ.q6PfEBwBlLKBmBMFsynhA6pOh6wyX4dYMsMjTWi1ksWaYtIfheCHOouhwamf4n_wk5nd8zU5GOp7dlwuX7dTzQ
 <style lang="less" scoped>
 #EntryList {
   height: 100vh;
