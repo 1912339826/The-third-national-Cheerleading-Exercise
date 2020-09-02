@@ -2,8 +2,8 @@
 const app = getApp();
 const fun_ref = app.ref.default;
 const fun_config = app.config.default;
+var log = require('../../log.js') // 引用上面的log.js文件
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -17,6 +17,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    log.info('hello test hahaha' + JSON.stringify(options)) // 日志会和当前打开的页面关联，建议在页面的onHide、onShow等生命周期里面打
     wx.setNavigationBarTitle({
       title: "活动" //页面标题为路由参数
     })
@@ -54,8 +55,7 @@ Page({
           id: res.data.result.id
         })
       },
-      er => {
-      })
+      er => {})
 
   },
 

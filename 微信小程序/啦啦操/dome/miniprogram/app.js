@@ -1,18 +1,22 @@
 //app.js
 let config = require('./pages/js/config');
 let ref = require('./pages/js/ref');
+var log = require('./log.js') // 引用上面的log.js文件
 App({
   ref: ref,
   config: config,
   onLaunch: function (options) {
-    if (options.scene == 1101 ||options.scene == 1011) {
+    wx.removeStorageSync('accessToken')
+    log.info('hello test hahaha' + JSON.stringify(options)) // 日志会和当前打开的页面关联，建议在页面的onHide、onShow等生命周期里面打
+    console.log(options)
+    if (options.scene == 1101 || options.scene == 1047 || options.scene == 1048) {
       // 判断是二维码进入
-      console.log(options.query.sceneId)
+      console.log(options.query.scene)
       // getTokenByScene
       ref.default.get(config.default.getTokenByScene.url, {
-        sceneId: options.query.sceneId
+        sceneId: options.query.scene
       }, res => {
-        // console.log(res.data.result.token)
+        console.log(res.data)
         // 存储用户Token
         wx.setStorageSync("accessToken", res.data.result.token);
         wx.login({
@@ -33,10 +37,7 @@ App({
           ref.default.post(config.default.wxLogin.url, {
             wxCode: res.code
           }, res => {
-            wx.setStorageSync("openid",res.data.result)
-            // console.log(res.header['Set-Cookie'])
-            // wx.setStorageSync('sessionid', res.header['Set-Cookie']); //保存Cookie到Storage
-            // wx.setStorageSync("accessToken", res.data.result.token);
+            wx.setStorageSync("openid", res.data.result)
           })
         }
       })

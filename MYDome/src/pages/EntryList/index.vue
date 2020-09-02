@@ -25,7 +25,7 @@
         <td>{{status[item.status]}}</td>
         <td class="button_">
           <!-- // 申请开票(黄金赛事) 邮寄地址 下载证书 -->
-          <button @click.stop="go_ApplyInvoice">申请开票</button>
+          <button @click.stop="go_ApplyInvoice" v-if="!!item.type">申请开票</button>
           <button @click.stop="mailing_address(item.id)">邮寄地址</button>
           <button
             @click.stop="Download_certificate(item.id,item.type)"
@@ -70,13 +70,13 @@ export default {
   data() {
     return {
       list: [
-        // {
-        //   activityId: "",
-        //   createTime: 0,
-        //   activityName: "",
-        //   cityName: "",
-        //   status: -1
-        // }
+        {
+          // activityId: "",
+          // createTime: 0,
+          // activityName: "",
+          // cityName: "",
+          // status: -1
+        }
       ],
       // 审核状态0未审核1审核通过2未通过
       status: { 0: "未审核", 1: "审核通过", 2: "未通过" },
@@ -207,11 +207,14 @@ export default {
           color: #ffd200;
         }
         button {
+          color: #000;
           padding: 1vw;
           border: none;
-          background-color: #1989fa;
+          background-color: #eeeeee;
+          border-radius: 5px;
+          font-size: 0.25rem;
           a {
-            color: #ffffff;
+            color: #000;
           }
           &:nth-child(2) {
             margin-top: 2vw;
