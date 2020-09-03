@@ -2,7 +2,7 @@
 	"miniprogramRoot": "miniprogram/",
 	"cloudfunctionRoot": "cloudfunctions/",
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"enhance": true,
 		"postcss": true,
@@ -25,7 +25,7 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
-		"useCompilerModule": false,
+		"useCompilerModule": true,
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"appid": "wx5c4a8ae79fe8e552",
@@ -67,7 +67,7 @@
 					"id": 1,
 					"name": "扫描二维码",
 					"pathName": "pages/ActivePage/ActivePage",
-					"query": "scene=e9ee050bae8547359166d43aca4bf8e6",
+					"query": "scene=9461af5732af4172a148146fa7849e9e",
 					"scene": 1047
 				},
 				{

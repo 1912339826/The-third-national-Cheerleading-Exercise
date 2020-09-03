@@ -6,41 +6,24 @@ App({
   ref: ref,
   config: config,
   onLaunch: function (options) {
-    wx.removeStorageSync('accessToken')
     log.info('hello test hahaha' + JSON.stringify(options)) // 日志会和当前打开的页面关联，建议在页面的onHide、onShow等生命周期里面打
-    console.log(options)
-    if (options.scene == 1101 || options.scene == 1047 || options.scene == 1048) {
-      // 判断是二维码进入
-      console.log(options.query.scene)
-      // getTokenByScene
-      ref.default.get(config.default.getTokenByScene.url, {
-        sceneId: options.query.scene
-      }, res => {
-        console.log(res.data)
-        // 存储用户Token
-        wx.setStorageSync("accessToken", res.data.result.token);
-        wx.login({
-          success: res => {
-            // 发送 res.code 到后台换取 openId, sessionKey, unionId
-            ref.default.post(config.default.wxLogin.url, {
-              wxCode: res.code
-            }, res => {
-              // console.log(res)
-            })
-          }
-        })
-      })
-    } else {
-      wx.login({
-        success: res => {
-          // 发送 res.code 到后台换取 openId, sessionKey, unionId
-          ref.default.post(config.default.wxLogin.url, {
-            wxCode: res.code
-          }, res => {
-            wx.setStorageSync("openid", res.data.result)
+    if (!!options.query.scene) {} else {
+      wx.removeStorage({
+        key: 'scene',
+        success() {
+          wx.login({
+            success: res => {
+              // 发送 res.code 到后台换取 openId, sessionKey, unionId
+              ref.default.post(config.default.wxLogin.url, {
+                wxCode: res.code
+              }, res => {
+                wx.setStorageSync("openid", res.data.result)
+              })
+            }
           })
         }
       })
+
     }
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')

@@ -140,7 +140,6 @@ Page({
   },
 
   async signAdd() {
-    wx.removeStorageSync('sessionid'); //每次登录时清楚缓存
     fun_ref.post(fun_config.appLetsSignAdd.url, {
       name: this.data.name,
       cityId: this.data.city.id,

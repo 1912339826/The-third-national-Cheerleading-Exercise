@@ -17,7 +17,31 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    log.info('hello test hahaha' + JSON.stringify(options)) // 日志会和当前打开的页面关联，建议在页面的onHide、onShow等生命周期里面打
+    console.log(!!options.scene)
+    if (!!options.scene) {
+      // 判断是代参二维码进入
+      // getTokenByScene
+      fun_ref.get(fun_config.getTokenByScene.url, {
+        sceneId: options.scene
+      }, res => {
+        console.log(res.data)
+        // 存储用户Token
+        wx.setStorageSync("scene", options.scene);
+        wx.setStorageSync("accessToken_scene", res.data.result.token);
+        wx.login({
+          success: res => {
+            // 发送 res.code 到后台换取 openId, sessionKey, unionId
+            fun_ref.post(fun_config.wxLogin.url, {
+              wxCode: res.code
+            }, res => {
+              console.log(res)
+            })
+          }
+        })
+      })
+
+    }
+    log.info('活动页面' + JSON.stringify(options)) // 日志会和当前打开的页面关联，建议在页面的onHide、onShow等生命周期里面打
     wx.setNavigationBarTitle({
       title: "活动" //页面标题为路由参数
     })
