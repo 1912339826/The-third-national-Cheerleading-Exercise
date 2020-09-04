@@ -17,9 +17,12 @@
       >
         <td style="text-align:justify;padding-left:1w;">
           <div>
-            <a href="#">第三届全国啦啦操创意展示大会文化创意视频网络大赛</a>
+            <!-- 第三届全国啦啦操创意展示大会 -->
+            <a href="#">文化创意视频网络大赛</a>
           </div>
           <div>{{item.cityName}} {{item.activityName}}</div>
+          <div v-if="!!item.type" style="color:#ffd200;margin-top: 2px;">黄金赛场</div>
+          <div v-if="!item.type" style="margin-top: 2px;">普通赛场</div>
         </td>
         <td>{{Todata(item.createTime)}}</td>
         <td>{{status[item.status]}}</td>
