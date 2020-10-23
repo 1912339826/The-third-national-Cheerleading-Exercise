@@ -26,7 +26,12 @@
 			</view>
 			<view>
 				<view class="nav">请填写您的联系方式</view>
-				<input type="text" bindinput="input_phone" value="{{phone}}"  disabled="{{Ismessage}}"/>
+				<input type="text" bindinput="input_phone" value="{{phone}}" disabled="{{Ismessage}}" />
+			</view>
+			<view>
+				<view class="nav">请输入参赛人数</view>
+				<van-stepper value="{{ count }}" integer min="1" input-width="80rpx" button-size="64rpx" disabled="{{Ismessage}}" bind:change="input_count"/>
+				<!-- <input type="number" bindinput="input_count" value="{{count}}" disabled="{{Ismessage}}" /> -->
 			</view>
 			<!-- 提示 -->
 			<view class="reminder">{{message}}</view>

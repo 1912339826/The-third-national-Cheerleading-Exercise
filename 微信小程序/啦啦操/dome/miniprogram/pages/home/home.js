@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    count: 1,
     columns: [],
     provinceList: [],
     province: "",
@@ -51,16 +52,18 @@ Page({
             url: '../Authorized/Authorized?page_name=home',
           })
         }
-        
+
       }
     })
   },
   async checkLogin() {
     fun_ref.post(fun_config.checkLogin.url, {}, res => {
+
       if (res.data.success) {
         this.setData({
           name: res.data.result.name,
           phone: res.data.result.phone,
+          count: Number(res.data.result.count),
           message: "已报名",
           Ismessage: true
         })
@@ -139,11 +142,18 @@ Page({
     })
   },
 
+  input_count(e) {
+    this.setData({
+      count: e.detail
+    })
+  },
+
   async signAdd() {
     fun_ref.post(fun_config.appLetsSignAdd.url, {
       name: this.data.name,
       cityId: this.data.city.id,
       phone: this.data.phone,
+      count: this.data.count,
       type: 1,
       openId: wx.getStorageSync("openid")
     }, res => {
