@@ -25,14 +25,14 @@ module.exports = {
 
     // Various Dev Server settings
     // host: "192.168.5.183", // can be overwritten by process.env.HOST
-    host:localhost,
+    host: localhost,
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: true,
     errorOverlay: true,
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-    
+
     /**
      * Source Maps
      */
@@ -61,7 +61,8 @@ module.exports = {
      * Source Maps
      */
 
-    productionSourceMap: true,
+    //  可以减少包大小，也可以加密源码
+    productionSourceMap: false,
     // https://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map',
 

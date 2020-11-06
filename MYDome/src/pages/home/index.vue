@@ -9,23 +9,46 @@
           <div class="hint">如未显示，请选择所属省下城市就近报名</div>
           <div class="select">
             <select v-model="province" @change="provinceChange" id="province">
-              <option :value="item" v-for="(item, index) in provinceList" :key="index">{{item.name}}</option>
+              <option
+                :value="item"
+                v-for="(item, index) in provinceList"
+                :key="index"
+              >
+                {{ item.name }}
+              </option>
             </select>
             <select v-model="city" @change="cityhange">
-              <option :value="item" v-for="(item, index) in cityList" :key="index">{{item.name}}</option>
+              <option
+                :value="item"
+                v-for="(item, index) in cityList"
+                :key="index"
+              >
+                {{ item.name }}
+              </option>
             </select>
           </div>
         </div>
         <div>
           <nav>请填写您的姓名</nav>
-          <input type="text" v-model="name" :disabled="Ismessage"/>
+          <input type="text" v-model="name" :disabled="Ismessage" />
         </div>
         <div>
           <nav>请填写您的联系方式</nav>
-          <input type="text" v-model="phone" :disabled="Ismessage"/>
+          <input type="text" v-model="phone" :disabled="Ismessage" />
+        </div>
+        <div>
+          <nav>请输入参赛人数</nav>
+          <Stepper
+            v-model="count"
+            min="1"
+            max="8"
+            input-width="10vw"
+            button-size="8vw"
+            :disabled="Ismessage"
+          />
         </div>
         <!-- 提示 -->
-        <div class="reminder">{{message}}</div>
+        <div class="reminder">{{ message }}</div>
         <button @click="submit" v-if="Ismessage">我要参赛</button>
         <button @click="cansai" v-if="!Ismessage">报名</button>
         <div class="query_log" @click="tolist">查询参赛记录 ></div>
@@ -34,13 +57,10 @@
     <img src="../../../static/images/home_cal.png" alt class="home_cal" />
     <div class="activity_rules">
       <div class="content" v-html="html">
-        一、活动时间：
-        (一)报名时间：6月6日-7月31日。
-        （二）评选时间：活动期间每周五19:00。
-        二、参与人员：
+        一、活动时间： (一)报名时间：6月6日-7月31日。
+        （二）评选时间：活动期间每周五19:00。 二、参与人员：
         个人、家庭、学校、俱乐部、企事业单位、社会团体、社区等可自由组合形式组队参赛。
-        三、展示项目：
-        （一）运动类作品（啦啦操动作技术、套路编排等）。
+        三、展示项目： （一）运动类作品（啦啦操动作技术、套路编排等）。
         (二)文化类作品（吉祥物、二次元、美术、音乐、文学、艺术创作、手作等）。
         （三）科技类作品（人工智能、编程、动画设计、视讯等）。
         四、报名及相关要求：
@@ -51,16 +71,22 @@
         活动以周为一个活动周期，截至每周五19：00前上传各自抖音截图，以截图“播放量、转发数、点赞数”三个指标为评比标准。
         六、录取名次与奖励：奖项设置：各地市设每周冠亚季军、赛季前十名；根据评比情况冠军颁发奖章、电子证书；亚军、季军颁发电子证书。设优秀组织奖。
       </div>
-      <img src="../../../static/images/home_bottom.png" alt class="home_bottom" />
+      <img
+        src="../../../static/images/home_bottom.png"
+        alt
+        class="home_bottom"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import { Toast } from 'vant';
+import { Toast, Stepper } from "vant";
 export default {
   name: "home",
-  components: {},
+  components: {
+    Stepper,
+  },
   props: {},
   data() {
     return {
@@ -72,7 +98,8 @@ export default {
       phone: "",
       message: "",
       html: "",
-      Ismessage:false
+      Ismessage: false,
+      count: 1,
     };
   },
   created() {
@@ -84,18 +111,18 @@ export default {
   update() {},
   methods: {
     cansai() {
-      if(this.Ismessage){
+      if (this.Ismessage) {
         Toast.fail("已报名!");
-      }else{
+      } else {
         this.signAdd();
       }
-      
     },
     async checkLogin() {
       let res = await this.$req(window.api.checkLogin, {});
       if (res.data.success) {
         this.name = res.data.result.name;
         this.phone = res.data.result.phone;
+        this.count = res.data.result.count;
         this.getParentCity(res.data.result.cityId);
         this.message = "已报名";
         this.Ismessage = true;
@@ -107,7 +134,7 @@ export default {
     },
     async getParentCity(id) {
       let res = await this.$req(window.api.getParentCity, {
-        cityId: id
+        cityId: id,
       });
       for (let index = 0; index < this.provinceList.length; index++) {
         const element = this.provinceList[index];
@@ -124,7 +151,7 @@ export default {
       }
     },
     async findCurrentActivity() {
-      let res = await this.$req(window.api.findCurrentActivity, {type:0});
+      let res = await this.$req(window.api.findCurrentActivity, { type: 0 });
       this.html = res.data.result.rule;
     },
     async toAuthIndex() {
@@ -132,10 +159,10 @@ export default {
     },
     submit() {
       // this.signAdd();
-      
-      if(this.Ismessage){
+
+      if (this.Ismessage) {
         this.$router.push("/ActivePage");
-      }else{
+      } else {
         Toast.fail("请先报名!");
       }
     },
@@ -144,14 +171,15 @@ export default {
         name: this.name,
         cityId: this.city.id,
         phone: this.phone,
-        type:0
+        type: 0,
+        count: this.count,
       });
       let message = res.data.message;
       if (message == "") {
         window.localStorage.setItem("accessToken", res.data.result.token);
         Toast.success("报名成功!");
         this.Ismessage = true;
-        this.message = "报名成功！请参赛！"
+        this.message = "报名成功！请参赛！";
       } else {
         this.message = message;
       }
@@ -185,15 +213,15 @@ export default {
           }
           return con;
         }, [])
-        .map(function(item) {
+        .map(function (item) {
           item[key] = [];
           return item;
         });
-    }
+    },
   },
   filters: {},
   computed: {},
-  watch: {}
+  watch: {},
 };
 </script>
 
@@ -215,16 +243,16 @@ export default {
         height: 13vw;
         line-height: 12vw;
       }
-      .hint{
+      .hint {
         font-size: 0.2rem;
-        color: rgb(34,33,33);
+        color: rgb(34, 33, 33);
         height: 5vw;
         line-height: 5vw;
       }
       .select {
         display: flex;
         justify-content: space-between;
-        
+
         select {
           border: 1px solid #dddddd;
           background-color: #fafafa;
